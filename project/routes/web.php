@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +35,20 @@ require __DIR__.'/auth.php';
 
 Route::resource('/comments', CommentController::class);
 Route::resource('/books', BookController::class)->middleware(['auth']);
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['admin']], function () {
+    Route::get('admin/dashboard', 'AdminController@dashboard');
+    Route::get('/settings', 'AdminController@settings');
+});
+
+Route::match(['get','post'], '/admin', 'AdminController@login');
