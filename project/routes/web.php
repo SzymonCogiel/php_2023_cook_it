@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -51,4 +54,12 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/settings', 'AdminController@settings');
 });
 
-Route::match(['get','post'], '/admin', 'AdminController@login');
+Route::match(['get','post'], '/admin', [AdminController::class, 'login']);
+
+Route::get('/', [FrontController::class, 'front']);
+
+Route::any('/signup', [UsersController::class, 'signup']);
+
+Route::get('/check-username', [UsersController::class, 'checkUsername']);
+
+Route::get('/check-email', [UsersController::class, 'checkEmail']);
