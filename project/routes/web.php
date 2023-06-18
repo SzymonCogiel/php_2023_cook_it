@@ -63,3 +63,5 @@ Route::any('/signup', [UsersController::class, 'signup']);
 Route::get('/check-username', [UsersController::class, 'checkUsername']);
 
 Route::get('/check-email', [UsersController::class, 'checkEmail']);
+
+Route::any('/signin', [UsersController::class, 'signin']);

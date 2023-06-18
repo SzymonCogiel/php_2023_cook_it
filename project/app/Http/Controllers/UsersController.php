@@ -50,4 +50,22 @@ class UsersController extends Controller
         }
 
     }
+
+    public function signin(Request $request)
+    {
+        if($request->isMethod('post')) {
+            $data = $request->input();
+
+            if (Auth::attempt(['email'=>$data['email'],'password'=>$data['password'],'admin'=>null])) {
+                echo "success";
+                die;
+            } else {
+                echo "failed";
+                die;
+            }
+        }
+
+    }
+
+
 }
