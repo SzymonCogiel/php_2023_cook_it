@@ -68,4 +68,4 @@ Route::any('/signin', [UsersController::class, 'signin']);
 
 Route::any('/phase/2', [UsersController::class, 'phase2']);
 
-Route::get('/inreview', [UsersController::class, 'interview']);
+Route::get('/interview', [UsersController::class, 'interview']);

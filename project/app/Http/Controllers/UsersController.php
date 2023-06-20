@@ -213,7 +213,7 @@ class UsersController extends Controller
     }
 
 
-    public function inreview()
+    public function interview()
     {
         return view('users.interview');
     }
