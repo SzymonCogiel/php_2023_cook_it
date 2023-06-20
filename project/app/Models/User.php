@@ -49,4 +49,14 @@ class User extends Authenticatable
         return $this->admin;
     }
 
+    public function details(){
+        return $this->hasOne('App\UserDetail', 'user_id');
+    }
+
+    public function filloutformProfileExists($user_id){
+        $filloutformCount = UserDetail::select('user_id', 'status')->where(['user_id' => $user_id,
+            'status' => 1])->count();
+
+        return $filloutformCount;
+    }
 }

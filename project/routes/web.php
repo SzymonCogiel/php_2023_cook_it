@@ -52,6 +52,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => ['admin']], function () {
     Route::get('admin/dashboard', 'AdminController@dashboard');
     Route::get('/settings', 'AdminController@settings');
+    Route::get('admin/views_users', 'UsersController@viewUsers');
+    Route::post('/admin/update-user-status', 'UsersController@updateUserStatus');
 });
 
 Route::match(['get','post'], '/admin', [AdminController::class, 'login']);

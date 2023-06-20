@@ -29,8 +29,8 @@ class UsersController extends Controller
             $user->password = bcrypt($data['password']);
             $user->save();
 
-            if (Auth::attempt(['name' => $data['name'], 'password' => $data['password'], 'admin' => '0'])) {
-                Session::put('frontSession', $data['name']);
+            if (Auth::attempt(['email' => $data['name'], 'password' => $data['password'], 'admin' => 'NULL'])) {
+                Session::put('frontSession', $data['email']);
                 return redirect('/phase/2');
             }
         }
@@ -216,6 +216,25 @@ class UsersController extends Controller
     public function interview()
     {
         return view('users.interview');
+    }
+
+    public function inreview(){
+        return view('users.inreview');
+    }
+
+    public function viewUsers(){
+
+        $users = User::with('details')->get();
+
+        $users = json_decode(json_encode($users), true);
+
+        return view('admin.users.view_users') -> with(compact('users'));
+    }
+
+    public function updateUserStatus(Request $request){
+        $data = $request->all();
+        UsersDetail::where('user_id', $data['user_id'])->update(['status'=>
+    $data['status']]);
     }
 
 }
