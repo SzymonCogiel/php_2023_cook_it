@@ -67,3 +67,5 @@ Route::get('/check-email', [UsersController::class, 'checkEmail']);
 Route::any('/signin', [UsersController::class, 'signin']);
 
 Route::any('/phase/2', [UsersController::class, 'phase2']);
+
+Route::get('/inreview', [UsersController::class, 'interview']);
