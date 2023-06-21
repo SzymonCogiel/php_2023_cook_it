@@ -1,4 +1,4 @@
-<?php
+x`<?php
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
@@ -54,6 +54,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/settings', 'AdminController@settings');
     Route::get('admin/views_users', 'UsersController@viewUsers');
     Route::post('/admin/update-user-status', 'UsersController@updateUserStatus');
+    Route::post('/admin/update-photo-status', 'USersController@updatePhotoStatus');
 });
 
 Route::match(['get','post'], '/admin', [AdminController::class, 'login']);
@@ -68,6 +69,23 @@ Route::get('/check-email', [UsersController::class, 'checkEmail']);
 
 Route::any('/signin', [UsersController::class, 'signin']);
 
-Route::any('/phase/2', [UsersController::class, 'phase2']);
+Route::group(['middleware'=>['userslogin']],function(){
 
-Route::get('/interview', [UsersController::class, 'interview']);
+    Route::any('/phase/2', [UsersController::class, 'phase2']);
+
+    Route::get('/interview', [UsersController::class, 'interview']);
+
+    Route::any('/phase3', [UsersController::class, 'phase3']);
+
+    Route::post('/photoupload','UsersController@postphoto');
+
+    Route::get('/delete-photo/{photo}', 'UsersController@deletePhoto');
+});
+
+Route::get('check-username','UsersController@checkUsername');
+
+Route::any('/profile/{username', 'UserController@viewProfile');
+
+Route::get('/default-photo/{photo}', 'UserController@deletePhoto');
+
+Route::any('/search', "UsersController@searchProfile");
