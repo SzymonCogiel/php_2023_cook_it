@@ -49,23 +49,41 @@ class User extends Authenticatable
         return $this->admin;
     }
 
-    public function details(){
+    public function details()
+    {
         return $this->hasOne('App\UserDetail', 'user_id');
     }
 
-    public function filloutformProfileExists($user_id){
+    public function filloutformProfileExists($user_id)
+    {
         $filloutformCount = UserDetail::select('user_id', 'status')->where(['user_id' => $user_id,
             'status' => 1])->count();
 
         return $filloutformCount;
     }
 
-    public static function filloutProfileDetails($user_id) {
+    public static function filloutProfileDetails($user_id)
+    {
         $filloutformContent = UserDetail::where('user_id', $user_id)->first;
         return $filloutformContent;
     }
 
-    public function photos() {
-        return $this->hasMany('App\UsersPhoto','user_id');
+    public function photos()
+    {
+        return $this->hasMany('App\UsersPhoto', 'user_id');
     }
+
+    public static function getNameofsender($user_id)
+    {
+        $getNameofsender=User::select('name')->where('id', '$user_id')->first();
+        return $getNameofsender->name;
+    }
+
+    public static function getCityofsender($user_id)
+    {
+        $getCityofsender=UserDetail::select('city')->where('user_id', $user_id)->first();
+
+        return $getCityofsender->city;
+    }
+
 }

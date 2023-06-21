@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,6 @@ use App\Country;
 use App\Language;
 use Image;
 use Storage;
-
-
 
 class UsersController extends Controller
 {
@@ -74,10 +73,10 @@ class UsersController extends Controller
 
             if (Auth::attempt(['username' => $data['username'], 'password' => $data['password'], 'admin' => null])) {
 
-                if (preg_match("/contact/i", Session::get('current_url'))){
+                if (preg_match("/contact/i", Session::get('current_url'))) {
                     Session::put('frontSession', $data['username']);
                     return redirect(Session::get('current_url'));
-                } else{
+                } else {
                     Session::put('frontSession', $data['username']);
                     return redirect('/phase/2');
                 }
@@ -98,7 +97,7 @@ class UsersController extends Controller
     public function phase2(Request $request)
     {
         $userFormCount = UsersDetail::where(['user_id'=>Auth::user()['id'],'status'=>0])->count();
-        if($userFormCount>0){
+        if($userFormCount>0) {
             return redirect('/inreview');
         }
 
@@ -109,7 +108,7 @@ class UsersController extends Controller
             // //linijka która tylko pokazuje czy się dobrze zapisuje, można usunąć, przydatna przy front
 
             if (empty($data['user_id'])) {
-                $userDetail = new UsersDetail;
+                $userDetail = new UsersDetail();
                 $userDetail->user_id = Auth::User()['id'];
 
             } else {
@@ -231,7 +230,8 @@ class UsersController extends Controller
         return view('users.interview');
     }
 
-    public function inreview(){
+    public function inreview()
+    {
         $user_id = Auth::User()['id'];
         $userStatus = UserDetail::select('status')->where('user_id', $user_id)->first();
         if($userStatus->status == 1) {
@@ -242,7 +242,8 @@ class UsersController extends Controller
         return view('users.inreview');
     }
 
-    public function viewUsers(){
+    public function viewUsers()
+    {
 
         $users = User::with('details')->with('photos')->get();
 
@@ -253,32 +254,35 @@ class UsersController extends Controller
         return view('admin.users.view_users') -> with(compact('users'));
     }
 
-    public function updateUserStatus(Request $request){
+    public function updateUserStatus(Request $request)
+    {
         $data = $request->all();
         UsersDetail::where('user_id', $data['user_id'])->update(['status'=>
     $data['status']]);
     }
 
-    public function phase3(Request $request){
+    public function phase3(Request $request)
+    {
         $user_id = Auth::User()['id'];
-        $user_photos = UsersPhoto::where('user_id',$user_id)->get();
+        $user_photos = UsersPhoto::where('user_id', $user_id)->get();
         return view('users.phase3')->with(compact('user_photos'));
     }
 
-    public function postphoto(Request $request){
+    public function postphoto(Request $request)
+    {
 
-        if($request->isMethod('post')){
+        if($request->isMethod('post')) {
 
             $data = $request->all();
 
             $formInput=$request->except('image');
 
             $image=$request->image;
-            if($image){
+            if($image) {
 
                 $imageName=$image->getClientOriginalName();
 
-                $image->move('images',$imageName);
+                $image->move('images', $imageName);
 
                 $formInput['image']=$imageName;
 
@@ -289,7 +293,7 @@ class UsersController extends Controller
             UsersPhoto::create($formInput);
 
             $user_id = Auth::User()['id'];
-            $user_photos = UsersPhoto::where('user_id',$user_id)->get();
+            $user_photos = UsersPhoto::where('user_id', $user_id)->get();
 
             // return redirect('/phase/3')->with('flash_message_success',
             //'Your photo(s) has been uploaded successfully.');
@@ -299,79 +303,122 @@ class UsersController extends Controller
         }
     }
 
-    public function deletePhoto($photo){
+    public function deletePhoto($photo)
+    {
         $user_id = Auth::User()->id;
         UsersPhoto::where(['user_id'=>$user_id,'image'=>$photo])->delete();
-        return redirect()->back()->with('flash_message_success','Photo has been deleted successfully!');
+        return redirect()->back()->with('flash_message_success', 'Photo has been deleted successfully!');
     }
 
-    public function updatePhotoStatus(Request $request){
+    public function updatePhotoStatus(Request $request)
+    {
         $data = $request->all();
-        UsersPhoto::where('id',$data['photo_id'])->update(['status'=>$data['status']]);
+        UsersPhoto::where('id', $data['photo_id'])->update(['status'=>$data['status']]);
     }
 
-    public function viewProfile($username) {
+    public function viewProfile($username)
+    {
 
         $userDetails = User::with('details')->with('photos')->where(
-            'username',$username)->first();
+            'username',
+            $username
+        )->first();
         $userDetails = json_decode(json_encode($userDetails));
         // echo "<pre>"; print_r($userDetails); die;
         return view('users.profile')->with(compact('userDetails'));
     }
 
-    public function defaultPhoto($photo){
+    public function defaultPhoto($photo)
+    {
         $user_id = Auth::User()->id;
-        UsersPhoto::where('user_id',$user_id)->update(['default_image'=>'No']);
+        UsersPhoto::where('user_id', $user_id)->update(['default_image'=>'No']);
         UsersPhoto::where(['user_id'=>$user_id,'image'=>$photo])->update(['default_image'=>'Yes']);
-        return redirect()->back()->with('flash_message_success','Default Picture has been placed successfully');
+        return redirect()->back()->with('flash_message_success', 'Default Picture has been placed successfully');
     }
 
-    public function searchProfile(Request $request){
-        if($request->isMethod('post')){
+    public function searchProfile(Request $request)
+    {
+        if($request->isMethod('post')) {
             $data = $request->all();
             $searched_users = User::with('details')->with('photos')
-                ->join('users_details','users_details.user_id','=','users.id')
+                ->join('users_details', 'users_details.user_id', '=', 'users.id')
 
-                ->where('users_details.gender',$data['gender'])
-                ->where('users_details.country',$data['country'])
-                ->orderBy('users.id','Desc')->get();
+                ->where('users_details.gender', $data['gender'])
+                ->where('users_details.country', $data['country'])
+                ->orderBy('users.id', 'Desc')->get();
 
             $searched_users = json_decode(json_encode($searched_users));
             $minimumyears = $data['minimumyears'];
             $maximumyears = $data['maximumyears'];
 
-            return view('users.search')->with(compact('searched_users','minimumyears',
-                'maximumyears'));
+            return view('users.search')->with(compact(
+                'searched_users',
+                'minimumyears',
+                'maximumyears'
+            ));
         }
     }
 
-    public function contactUser(Request $request, $username){
+    public function contactUser(Request $request, $username)
+    {
         $userCount = User::where('username', $username)->count();
 
-        if($userCount > 0){
-            $userDetails = User::with('details')->with('photos')->where('username',
-                $username)->first();
+        if($userCount > 0) {
+            $userDetails = User::with('details')->with('photos')->where(
+                'username',
+                $username
+            )->first();
             $userDetails = json_decode(json_encode($userDetails));
 
-//            if($request->isMethod('post')){
-//                $data = $request->all();
-//                echo "Person who sent message";
-//
-//                echo Auth::user()->username; echo "--";
-//                echo Auth::user()->id;
-//                echo
-//            }
+            if($request->isMethod('post')) {
+                $data = $request->all();
+                echo "Person who sent message";
+
+                echo Auth::user()->username;
+                echo "--";
+                echo Auth::user()->id;
+                echo "<br>";
+
+                echo "Person who received the message";
+                echo $username;
+                echo "--";
+
+                echo $userDetails->id;
+
+                $reply=new Reply();
+                $reply->sender_id=Auth::user()->id;
+                $reply->receiver_id=$userDetails->id;
+                $reply->message=$data['message'];
+                $reply->save();
+                return redirect()->back()->with('flash_message_success', 'Your response has been sent to this person');
+            }
         } else {
             abort(404);
         }
 
-        if($request->isMethod('post')){
+        if($request->isMethod('post')) {
             $data = $request->all();
-            echo "<pre>"; print_r($data); die;
+            echo "<pre>";
+            print_r($data);
+            die;
         }
 
         return view('user.contact')->with(compact('userDetails'));
     }
+    public function replies()
+    {
+        $receiver_id=Auth::user()->id;
+        $replies=Reply::where('receiver_id', $receiver_id)->orderBy('id', 'Desc')->get();
 
+        //$replies=json_decode(json_encode($replies));
+
+        //echo "<pre>";
+        //print_r($replies);
+        //die;
+        return view('users.replies')->with(compact('replies'));
+    }
+
+    public function shootedMessages(){
+        return view('users.shooted_messages');
+    }
 }
-

@@ -77,17 +77,25 @@ Route::group(['middleware'=>['userslogin']],function(){
 
     Route::any('/phase3', [UsersController::class, 'phase3']);
 
-    Route::post('/photoupload','UsersController@postphoto');
+    Route::post('/photoupload',[UsersController::class, 'postphoto']);
 
-    Route::get('/delete-photo/{photo}', 'UsersController@deletePhoto');
+    Route::get('/delete-photo/{photo}', [UsersController::class, 'deletePhoto']);
 
-    Route::match(['get', 'post'], '/contact/{username}', 'UsersController@contactUser');
+    Route::match(['get', 'post'], '/contact/{username}', [UsersController::class, 'contactUser']);
+
+    Route::get('/shooted-messages',[UsersController::class, 'shootedMessages']);
+
+    Route::get('/replies', [UsersController::class, 'replies']);
 });
 
-Route::get('check-username','UsersController@checkUsername');
+Route::get('check-username',[UsersController::class, 'checkUsername']);
 
-Route::any('/profile/{username', 'UserController@viewProfile');
+Route::any('/profile/{username', [UsersController::class, 'viewProfile']);
 
-Route::get('/default-photo/{photo}', 'UserController@deletePhoto');
+Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 
-Route::any('/search', "UsersController@searchProfile");
+Route::any('/search', [UsersController::class, 'searchProfile']);
+
+Route::get('/logout', [UsersController::class, 'logout']);
+
+
