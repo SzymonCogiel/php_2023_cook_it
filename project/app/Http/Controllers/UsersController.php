@@ -74,6 +74,13 @@ class UsersController extends Controller
 
             if (Auth::attempt(['username' => $data['username'], 'password' => $data['password'], 'admin' => null])) {
 
+                if (preg_match("/contact/i", Session::get('current_url'))){
+                    Session::put('frontSession', $data['username']);
+                    return redirect(Session::get('current_url'));
+                } else{
+                    Session::put('frontSession', $data['username']);
+                    return redirect('/phase/2');
+                }
 
                 Session::put('frontSession', $data['username']);
                 return redirect('/phase/2');
@@ -98,7 +105,8 @@ class UsersController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
 
-            //echo "<pre>"; print_r($data); die; //linijka która tylko pokazuje czy się dobrze zapisuje, można usunąć, przydatna przy front
+            //echo "<pre>"; print_r($data); die;
+            // //linijka która tylko pokazuje czy się dobrze zapisuje, można usunąć, przydatna przy front
 
             if (empty($data['user_id'])) {
                 $userDetail = new UsersDetail;
@@ -283,7 +291,8 @@ class UsersController extends Controller
             $user_id = Auth::User()['id'];
             $user_photos = UsersPhoto::where('user_id',$user_id)->get();
 
-            // return redirect('/phase/3')->with('flash_message_success','Your photo(s) has been uploaded successfully.');
+            // return redirect('/phase/3')->with('flash_message_success',
+            //'Your photo(s) has been uploaded successfully.');
 
             return view('users.phase3')->with(compact('user_photos'));
 
@@ -303,7 +312,8 @@ class UsersController extends Controller
 
     public function viewProfile($username) {
 
-        $userDetails = User::with('details')->with('photos')->where('username',$username)->first();
+        $userDetails = User::with('details')->with('photos')->where(
+            'username',$username)->first();
         $userDetails = json_decode(json_encode($userDetails));
         // echo "<pre>"; print_r($userDetails); die;
         return view('users.profile')->with(compact('userDetails'));
@@ -330,8 +340,37 @@ class UsersController extends Controller
             $minimumyears = $data['minimumyears'];
             $maximumyears = $data['maximumyears'];
 
-            return view('users.search')->with(compact('searched_users','minimumyears','maximumyears'));
+            return view('users.search')->with(compact('searched_users','minimumyears',
+                'maximumyears'));
         }
+    }
+
+    public function contactUser(Request $request, $username){
+        $userCount = User::where('username', $username)->count();
+
+        if($userCount > 0){
+            $userDetails = User::with('details')->with('photos')->where('username',
+                $username)->first();
+            $userDetails = json_decode(json_encode($userDetails));
+
+//            if($request->isMethod('post')){
+//                $data = $request->all();
+//                echo "Person who sent message";
+//
+//                echo Auth::user()->username; echo "--";
+//                echo Auth::user()->id;
+//                echo
+//            }
+        } else {
+            abort(404);
+        }
+
+        if($request->isMethod('post')){
+            $data = $request->all();
+            echo "<pre>"; print_r($data); die;
+        }
+
+        return view('user.contact')->with(compact('userDetails'));
     }
 
 }

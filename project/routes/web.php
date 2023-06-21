@@ -80,6 +80,8 @@ Route::group(['middleware'=>['userslogin']],function(){
     Route::post('/photoupload','UsersController@postphoto');
 
     Route::get('/delete-photo/{photo}', 'UsersController@deletePhoto');
+
+    Route::match(['get', 'post'], '/contact/{username}', 'UsersController@contactUser');
 });
 
 Route::get('check-username','UsersController@checkUsername');
