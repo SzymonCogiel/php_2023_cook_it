@@ -59,4 +59,13 @@ class User extends Authenticatable
 
         return $filloutformCount;
     }
+
+    public static function filloutProfileDetails($user_id) {
+        $filloutformContent = UserDetail::where('user_id', $user_id)->first;
+        return $filloutformContent;
+    }
+
+    public function photos() {
+        return $this->hasMany('App\UsersPhoto','user_id');
+    }
 }
