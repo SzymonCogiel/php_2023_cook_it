@@ -225,11 +225,6 @@ class UsersController extends Controller
     }
 
 
-    public function interview()
-    {
-        return view('users.interview');
-    }
-
     public function inreview()
     {
         $user_id = Auth::User()['id'];
@@ -444,6 +439,17 @@ class UsersController extends Controller
 
             Reply::where('id',$data['reply_id'])->update(['viewed'=>1]);
         }
+    }
+
+
+    public function login()
+    {
+        return view('users.login');
+    }
+
+    public function profile()
+    {
+        return view('users.profile');
     }
 
 }

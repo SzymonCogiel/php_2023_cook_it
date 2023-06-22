@@ -61,7 +61,7 @@ Route::match(['get','post'], '/admin', [AdminController::class, 'login']);
 
 Route::get('/', [FrontController::class, 'front']);
 
-Route::any('/signup', [UsersController::class, 'signup']);
+Route::any('/signup', [UsersController::class, 'signup'])->name('register');
 
 Route::get('/check-username', [UsersController::class, 'checkUsername']);
 
@@ -69,15 +69,19 @@ Route::get('/check-email', [UsersController::class, 'checkEmail']);
 
 Route::any('/signin', [UsersController::class, 'signin']);
 
+Route::get('/login', [UsersController::class, 'login'])->name('login');
+
 Route::group(['middleware'=>['userslogin']],function(){
 
     Route::any('/phase/2', [UsersController::class, 'phase2']);
 
-    Route::get('/interview', [UsersController::class, 'interview']);
+    Route::get('/inreview', [UsersController::class, 'inreview']);
 
-    Route::any('/phase3', [UsersController::class, 'phase3']);
+    Route::any('/phase/3', [UsersController::class, 'phase3']);
 
     Route::post('/photoupload',[UsersController::class, 'postphoto']);
+
+    Route::get('/profile', [UsersController::class, 'profile']);
 
     Route::get('/delete-photo/{photo}', [UsersController::class, 'deletePhoto']);
 

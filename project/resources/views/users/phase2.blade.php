@@ -2,11 +2,9 @@
 <form>
     <label for="nickname">Nickname:</label><br>
     <input type="text" id="nickname" name="nickname"><br>
-    <label for="skills">Your cooking skills (1 - 10):</label><br>
-    <input type="text" id="skills" name="skills" value="1"><br>
+    <label for="skills">Your cooking skills (0 - 10):</label><br>
+    <input type="text" id="skills" name="skills" value="0"><br>
     <p>This will be the level at which you start. After that, the level will be taken into account based on your points.</p>
-    <br><br>
-
     <label for="city">City:</label><br>
     <input type="text" id="city" name="city"><br><br>
     <label for="travel">Do you want meet people only from your town (Y/N):</label><br>
