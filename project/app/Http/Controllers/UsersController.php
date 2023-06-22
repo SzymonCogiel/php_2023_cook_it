@@ -221,7 +221,7 @@ class UsersController extends Controller
         Auth::logout();
         Session::forget('frontSession');
         Session::forget('current_url');
-        return redirect()->action('FrontController@front');
+        return redirect()->action([FrontController::class, 'front']);
     }
 
 

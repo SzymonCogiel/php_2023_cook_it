@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+/*
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,18 +43,18 @@ Route::resource('/books', BookController::class)->middleware(['auth']);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['middleware' => ['admin']], function () {
-    Route::get('admin/dashboard', 'AdminController@dashboard');
-    Route::get('/settings', 'AdminController@settings');
-    Route::get('admin/views_users', 'UsersController@viewUsers');
-    Route::post('/admin/update-user-status', 'UsersController@updateUserStatus');
-    Route::post('/admin/update-photo-status', 'USersController@updatePhotoStatus');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+*/
+Route::middleware(['admin'])->group(function () {
+    Route::get('admin/dashboard', [AdminController::class, 'dashboard']);
+    Route::get('/settings', [AdminController::class, 'settings']);
+    Route::get('admin/views_users', [UsersController::class, 'viewUsers']);
+    Route::post('/admin/update-user-status', [UsersController::class, 'updateUserStatus']);
+    Route::post('/admin/update-photo-status', [UsersController::class, 'updatePhotoStatus']);
 });
 
 Route::match(['get','post'], '/admin', [AdminController::class, 'login']);
@@ -94,7 +94,7 @@ Route::group(['middleware'=>['userslogin']],function(){
 
 Route::get('check-username',[UsersController::class, 'checkUsername']);
 
-Route::any('/profile/{username', [UsersController::class, 'viewProfile']);
+Route::any('/profile/{username}', [UsersController::class, 'viewProfile']);
 
 Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 

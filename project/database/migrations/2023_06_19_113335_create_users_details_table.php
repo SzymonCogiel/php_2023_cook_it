@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('dob');
             $table-> string('gender');
             $table-> string('height');
-            $table-> string('martial_status');
+            $table-> string('marital_status');
             $table->timestamps();
         });
     }
