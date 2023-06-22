@@ -1,1 +1,1 @@
-<h1>Dashboard</h1>
+<h1>Dashboard adminowy z guzikami na liste uzytkownikow</h1>
