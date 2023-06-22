@@ -86,6 +86,10 @@ Route::group(['middleware'=>['userslogin']],function(){
     Route::get('/shooted-messages',[UsersController::class, 'shootedMessages']);
 
     Route::get('/replies', [UsersController::class, 'replies']);
+
+    Route::get('/delete-reply/{id}',[UsersController::class, 'deleteReply']);
+
+    Route::post('/update-reply',[UsersController::class, 'updateReply']);
 });
 
 Route::get('check-username',[UsersController::class, 'checkUsername']);

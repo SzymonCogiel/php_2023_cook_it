@@ -418,7 +418,32 @@ class UsersController extends Controller
         return view('users.replies')->with(compact('replies'));
     }
 
-    public function shootedMessages(){
-        return view('users.shooted_messages');
+    public function shootedMessages()
+    {
+        $sender_id=Auth::user()->id;
+
+        $shooted_messages=Reply::where('sender_id', $sender_id)->orderBy('id', 'Desc')->get();
+        $shooted_messages=json_decode(json_encode($shooted_messages));
+        //echo "<pre>";
+        //print_r($shooted_messages);
+        //die;
+        return view('users.shooted_messages')->with(compact('shooted_messages'));
     }
+
+    public function deleteReply($id)
+    {
+        Reply::where('id', $id)->delete();
+
+        return redirect()->back()->with('flash_message_success', 'Reply has been deleted successfully');
+    }
+
+    public function updateReply(Request $request){
+        if($request->isMethod('post')){
+            $data=$request->all();
+            //echo "<pre>"; print_r($data); die;
+
+            Reply::where('id',$data['reply_id'])->update(['viewed'=>1]);
+        }
+    }
+
 }

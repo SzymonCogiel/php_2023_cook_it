@@ -86,4 +86,9 @@ class User extends Authenticatable
         return $getCityofsender->city;
     }
 
+    public static function getUsernameofuser($user_id){
+        $getUsernameofuser=User::select('username')->where('id',$user_id)->first();
+        return $getUsernameofuser->username;
+    }
+
 }
