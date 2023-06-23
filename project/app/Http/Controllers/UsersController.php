@@ -64,34 +64,58 @@ class UsersController extends Controller
         }
 
     }
-
     public function signin(Request $request)
     {
+        if (Auth::check()) {
+            return redirect('/profile');
+        }
         if ($request->isMethod('post')) {
             $data = $request->input();
+            $request->validate([
+                'username' => 'required',
+                'password' => 'required',
+            ]);
 
-            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password'], 'admin' => null])) {
+            $credentials = [
+                'username' => $data['username'],
+                'password' => $data['password'],
+            ];
 
-                if (preg_match("/contact/i", Session::get('current_url'))) {
-                    Session::put('frontSession', $data['username']);
-                    return redirect(Session::get('current_url'));
-                } else {
-                    Session::put('frontSession', $data['username']);
-                    return redirect('/phase/2');
-                }
-
-                Session::put('frontSession', $data['username']);
-                return redirect('/phase/2');
-                //echo "success";
-                // die;
+            if (Auth::attempt($credentials)) {
+                return redirect('profile');
             } else {
-                //echo "failed";
-                //die;
-                return redirect::back()->with('flash_message_error', 'Invalid Username or Password');
+                return redirect()->back()->withErrors(['error' => 'Invalid username or password']);
             }
+
         }
 
+        return view('users.login');
     }
+//    public function signin(Request $request){
+//        if($request->isMethod('post')){
+//            $data = $request->input();
+//            echo"<pre>"; print_r($data);
+//    }
+//    }
+//    public function signin(Request $request)
+//    {
+//        if ($request->isMethod('post')) {
+//            $data = $request->input();
+//
+//            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
+//                echo "XD";
+//                if (preg_match("/contact/i", session('current_url'))) {
+//                    session()->put('frontSession', $data['username']);
+//                    return redirect(session('current_url'));
+//                } else {
+//                    session()->put('frontSession', $data['username']);
+//                    return redirect('/phase/2');
+//                }
+//            } else {
+//                return redirect()->back()->with('flash_message_error', 'Invalid Username or Password');
+//            }
+//        }
+//    }
     public function phase2(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -461,10 +485,10 @@ class UsersController extends Controller
     }
 
 
-    public function login()
-    {
-        return view('users.login');
-    }
+//    public function login()
+//    {
+//        return view('users.login');
+//    }
 
     public function profile()
     {
