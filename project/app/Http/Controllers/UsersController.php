@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
-use App\Response;
-use App\Admin;
-use App\UsersDetail;
-use App\UsersPhoto;
-use App\Hobby;
-use App\Country;
-use App\Language;
-use Image;
-use Storage;
+use App\Models\Response;
+use App\Models\Admin;
+use App\Models\UserDetail;
+use App\Models\UsersPhoto;
+use App\Models\Hobby;
+use App\Models\Country;
+use App\Models\Language;
+use Nette\Utils\Image;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -26,8 +26,6 @@ class UsersController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
 
-            $this->validate($request, ['g-recaptcha-response' => 'required|captcha',]);
-
             $user = new User();
             $user->name = $data['name'];
             $user->username = $data['username'];
@@ -35,8 +33,9 @@ class UsersController extends Controller
             $user->password = bcrypt($data['password']);
             $user->save();
 
-            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password'], 'admin' => 'NULL'])) {
+            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
                 Session::put('frontSession', $data['username']);
+                echo "Git";
                 return redirect('/phase/2');
             }
         }
@@ -93,128 +92,147 @@ class UsersController extends Controller
         }
 
     }
-
     public function phase2(Request $request)
     {
-        $userFormCount = UsersDetail::where(['user_id'=>Auth::user()['id'],'status'=>0])->count();
-        if($userFormCount>0) {
-            return redirect('/inreview');
-        }
-
         if ($request->isMethod('post')) {
             $data = $request->all();
 
-            //echo "<pre>"; print_r($data); die;
-            // //linijka która tylko pokazuje czy się dobrze zapisuje, można usunąć, przydatna przy front
-
-            if (empty($data['user_id'])) {
-                $userDetail = new UsersDetail();
-                $userDetail->user_id = Auth::User()['id'];
-
-            } else {
-                $userDetail = UsersDetail::where('user_id', $data['user_id'])->firts();
-                $userDetail->status = 0;
-            }
-            $userDetail->username = Session::get('frontSession');
-            $userDetail->user_id = Auth::User()['id'];
-            $userDetail->dob = $data['dob'];
-            $userDetail->gender = $data['gender'];
-            $userDetail->height = $data['height'];
-            $userDetail->marital_status = $data['maritial_status'];
-            //$userDetail->save();
-            if (empty($data['body_type'])) {
-
-                $data['body_type'] = '';
-            }
-
-            if (empty($data['city'])) {
-
-                $data['city'] = '';
-            }
-
-            if (empty($data['state'])) {
-
-                $data['state'] = '';
-            }
-
-            if (empty($data['country'])) {
-
-                $data['country'] = '';
-            }
-
-
-            if (empty($data['education'])) {
-
-                $data['education'] = '';
-            }
-
-
-            if (empty($data['occupation'])) {
-
-                $data['occupation'] = '';
-            }
-
-
-            if (empty($data['income'])) {
-                $data['income'] = '';
-            }
-
-
-            if (empty($data['complexion'])) {
-                $data['complexion'] = '';
-            }
-
-            $userDetail->body_type = $data['body_type'];
-            $userDetail->complexion = $data['complexion'];
+            $userDetail = new UserDetail;
+            $userDetail->user_id = Auth::user()['id'];
+            $userDetail->skills = $data['skills'];
             $userDetail->city = $data['city'];
-            $userDetail->state = $data['state'];
-            $userDetail->country = $data['country'];
-            $userDetail->languages = $data['languages'];
-
-            $userDetail->education = $data['education'];
-            $userDetail->occupation = $data['occupation'];
-            $userDetail->income = $data['income'];
-            $userDetail->about_myself = $data['about_myself'];
-            $userDetail->about_partner = $data['about_partner'];
-
-            $hobbies = "";
-            if (!empty($data['hobbies'])) {
-                foreach ($data['hobbies'] as $hobby) {
-                    $hobbies .= $hobby . ', ';
-                }
-            }
-
-            $userDetail->hobbies = $hobbies;
-
-
-            $languages = "";
-            if (!empty($data['languages'])) {
-                foreach ($data['languages'] as $language) {
-                    $languages .= $language . ', ';
-                }
-            }
-            $userDetail->languages = $languages;
+            $userDetail->cost = $data['cost'];
+            $userDetail->travel = $data['travel'];
+            $userDetail->alergie = $data['alergie'];
             $userDetail->save();
+            return redirect('phase/3');
         }
 
-
-        // Get all Countries
-
-        $countries = Country::get();
-
-        // Get all languages
-
-
-        $languages = Language::orderBy('name', 'ASC')->get();
-
-
-        // Get all Hobbies
-
-
-        $hobbies = Hobby::orderBy('title', 'ASC')->get();
-
-        return view('users.phase2')->with(compact('countries', 'languages', 'hobbies'));
+        return view('users.phase2');
     }
+    //    public function phase2(Request $request)
+    //    {
+    //        $userFormCount = UserDetail::where('user_id', Auth::user()->getAuthIdentifier())
+    //            ->where('status', 0)
+    //            ->count();
+    //            if($userFormCount>0) {
+    //                return redirect('/inreview');
+    //            }
+    //
+    //        if ($request->isMethod('post')) {
+    //            $data = $request->all();
+    //
+    //            //echo "<pre>"; print_r($data); die;
+    //            // //linijka która tylko pokazuje czy się dobrze zapisuje, można usunąć, przydatna przy front
+    //
+    //            if (empty($data['user_id'])) {
+    //                $userDetail = new UserDetail();
+    //                $userDetail->user_id = Auth::User()['id'];
+    //
+    //            } else {
+    //                $userDetail = UserDetail::where('user_id', $data['user_id'])->firts();
+    //                $userDetail->status = 0;
+    //            }
+    //            $userDetail->username = Session::get('frontSession');
+    //            $userDetail->user_id = Auth::User()['id'];
+    //            $userDetail->dob = $data['dob'];
+    //            $userDetail->gender = $data['gender'];
+    //            $userDetail->height = $data['height'];
+    //            $userDetail->marital_status = $data['maritial_status'];
+    //            //$userDetail->save();
+    //            if (empty($data['body_type'])) {
+    //
+    //                $data['body_type'] = '';
+    //            }
+    //
+    //            if (empty($data['city'])) {
+    //
+    //                $data['city'] = '';
+    //            }
+    //
+    //            if (empty($data['state'])) {
+    //
+    //                $data['state'] = '';
+    //            }
+    //
+    //            if (empty($data['country'])) {
+    //
+    //                $data['country'] = '';
+    //            }
+    //
+    //
+    //            if (empty($data['education'])) {
+    //
+    //                $data['education'] = '';
+    //            }
+    //
+    //
+    //            if (empty($data['occupation'])) {
+    //
+    //                $data['occupation'] = '';
+    //            }
+    //
+    //
+    //            if (empty($data['income'])) {
+    //                $data['income'] = '';
+    //            }
+    //
+    //
+    //            if (empty($data['complexion'])) {
+    //                $data['complexion'] = '';
+    //            }
+    //
+    //            $userDetail->body_type = $data['body_type'];
+    //            $userDetail->complexion = $data['complexion'];
+    //            $userDetail->city = $data['city'];
+    //            $userDetail->state = $data['state'];
+    //            $userDetail->country = $data['country'];
+    //            $userDetail->languages = $data['languages'];
+    //
+    //            $userDetail->education = $data['education'];
+    //            $userDetail->occupation = $data['occupation'];
+    //            $userDetail->income = $data['income'];
+    //            $userDetail->about_myself = $data['about_myself'];
+    //            $userDetail->about_partner = $data['about_partner'];
+    //
+    //            $hobbies = "";
+    //            if (!empty($data['hobbies'])) {
+    //                foreach ($data['hobbies'] as $hobby) {
+    //                    $hobbies .= $hobby . ', ';
+    //                }
+    //            }
+    //
+    //            $userDetail->hobbies = $hobbies;
+    //
+    //
+    //            $languages = "";
+    //            if (!empty($data['languages'])) {
+    //                foreach ($data['languages'] as $language) {
+    //                    $languages .= $language . ', ';
+    //                }
+    //            }
+    //            $userDetail->languages = $languages;
+    //            $userDetail->save();
+    //        }
+    //
+    //
+    //        // Get all Countries
+    //
+    //        $countries = Country::get();
+    //
+    //        // Get all languages
+    //
+    //
+    //        $languages = Language::orderBy('name', 'ASC')->get();
+    //
+    //
+    //        // Get all Hobbies
+    //
+    //
+    //        $hobbies = Hobby::orderBy('title', 'ASC')->get();
+    //
+    //        return view('users.phase2')->with(compact('countries', 'languages', 'hobbies'));
+    //    }
 
     public function logout()
     {
@@ -252,7 +270,7 @@ class UsersController extends Controller
     public function updateUserStatus(Request $request)
     {
         $data = $request->all();
-        UsersDetail::where('user_id', $data['user_id'])->update(['status'=>
+        UserDetail::where('user_id', $data['user_id'])->update(['status'=>
     $data['status']]);
     }
 
@@ -432,12 +450,13 @@ class UsersController extends Controller
         return redirect()->back()->with('flash_message_success', 'Reply has been deleted successfully');
     }
 
-    public function updateReply(Request $request){
-        if($request->isMethod('post')){
+    public function updateReply(Request $request)
+    {
+        if($request->isMethod('post')) {
             $data=$request->all();
             //echo "<pre>"; print_r($data); die;
 
-            Reply::where('id',$data['reply_id'])->update(['viewed'=>1]);
+            Reply::where('id', $data['reply_id'])->update(['viewed'=>1]);
         }
     }
 

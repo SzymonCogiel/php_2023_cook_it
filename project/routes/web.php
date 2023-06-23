@@ -67,13 +67,13 @@ Route::get('/check-username', [UsersController::class, 'checkUsername']);
 
 Route::get('/check-email', [UsersController::class, 'checkEmail']);
 
-Route::any('/signin', [UsersController::class, 'signin']);
+Route::any('/signin', [UsersController::class, 'login'])->name('login');
 
-Route::get('/login', [UsersController::class, 'login'])->name('login');
+//Route::get('/login', [UsersController::class, 'login'])->name('login');
 
 Route::group(['middleware'=>['userslogin']],function(){
 
-    Route::any('/phase/2', [UsersController::class, 'phase2']);
+    Route::any('/phase/2', [UsersController::class, 'phase2'])->name('phase3');
 
     Route::get('/inreview', [UsersController::class, 'inreview']);
 

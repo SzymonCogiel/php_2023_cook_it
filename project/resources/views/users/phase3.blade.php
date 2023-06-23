@@ -20,7 +20,7 @@
 
     <h1><strong>You can upload your pictures here</strong></h1>
 
-    <form method ="POST" action = "/action">
+    <form method ="POST" action = "{{ route('phase3') }}">
     <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
     <div class="form-group">
         {{ Form::label('image', 'Image') }}
