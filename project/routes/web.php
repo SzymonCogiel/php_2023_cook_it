@@ -72,8 +72,6 @@ Route::any('/signin', [UsersController::class, 'signin'])->name('signin');
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 
 
-//Route::get('/login', [UsersController::class, 'login'])->name('login');
-
 Route::group(['middleware'=>['userslogin']],function(){
 
     Route::any('/phase/2', [UsersController::class, 'phase2'])->name('phase3');
@@ -84,7 +82,6 @@ Route::group(['middleware'=>['userslogin']],function(){
 
     Route::post('/photoupload',[UsersController::class, 'postphoto']);
 
-   // Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 
     Route::get('/delete-photo/{photo}', [UsersController::class, 'deletePhoto']);
 
@@ -105,7 +102,8 @@ Route::get('check-username',[UsersController::class, 'checkUsername']);
 
 Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 
-Route::any('/search', [UsersController::class, 'searchProfile']);
+Route::any('/search', [UsersController::class, 'search'])->name('search');
+//Route::get('/search', [UserController::class, 'search']);
 
 Route::get('/logout', [UsersController::class, 'logout']);
 

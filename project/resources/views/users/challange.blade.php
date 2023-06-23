@@ -1,7 +1,7 @@
 <h1>Add challange for your friends!</h1>
 
 <h2>Add new challange:</h2>
-<form>
+<form method="POST" action="{{ route('search') }}">
     <label for="dish">Dish name:</label><br>
     <input type="text" id="dish" name="dish"><br>
     <label for="skills">Skill level(0 - 10):</label><br>

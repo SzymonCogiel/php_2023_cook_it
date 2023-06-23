@@ -49,10 +49,10 @@ class User extends Authenticatable
         return $this->admin;
     }
 
-    public function details()
-    {
-        return $this->hasOne('App\UserDetail', 'user_id');
-    }
+//    public function details()
+//    {
+//        return $this->hasOne('App\UserDetail', 'user_id');
+//    }
 
     public function filloutformProfileExists($user_id)
     {

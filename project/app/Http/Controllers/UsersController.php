@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Challenge;
 use App\Models\Reply;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ use App\Models\UsersPhoto;
 use App\Models\Hobby;
 use App\Models\Country;
 use App\Models\Language;
+use Illuminate\Support\Facades\Validator;
 use Nette\Utils\Image;
 use Illuminate\Support\Facades\Storage;
 
@@ -26,6 +28,20 @@ class UsersController extends Controller
         if ($request->isMethod('post')) {
             $data = $request->all();
 
+            $validator = Validator::make($data, [
+                'name' => 'required',
+                'username' => 'required|unique:users',
+                'email' => 'required|email|unique:users',
+                'password' => 'required|string|min:8|confirmed|regex:/^(?=.*[A-Z])/',
+            ]);
+
+            if ($validator->fails()) {
+                return redirect('/signup')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+
             $user = new User();
             $user->name = $data['name'];
             $user->username = $data['username'];
@@ -35,35 +51,35 @@ class UsersController extends Controller
 
             if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
                 Session::put('frontSession', $data['username']);
-                echo "Git";
+
                 return redirect('/phase/2');
             }
         }
         return view('users.register');
     }
 
-    public function checkUsername(Request $request)
-    {
-        $data = $request->all();
-        $usersCount = User::where('username', $data['username'])->count();
-        if ($usersCount > 0) {
-            echo 'false';
-        } else {
-            echo 'true';
-        }
-    }
+//    public function checkUsername(Request $request)
+//    {
+//        $data = $request->all();
+//        $usersCount = User::where('username', $data['username'])->count();
+//        if ($usersCount > 0) {
+//            echo 'false';
+//        } else {
+//            echo 'true';
+//        }
+//    }
 
-    public function checkEmail(Request $request)
-    {
-        $data = $request->all();
-        $usersCount = User::where('email', $data['email'])->count();
-        if ($usersCount > 0) {
-            echo 'false';
-        } else {
-            echo 'true';
-        }
-
-    }
+//    public function checkEmail(Request $request)
+//    {
+//        $data = $request->all();
+//        $usersCount = User::where('email', $data['email'])->count();
+//        if ($usersCount > 0) {
+//            echo 'false';
+//        } else {
+//            echo 'true';
+//        }
+//
+//    }
     public function signin(Request $request)
     {
         if (Auth::check()) {
@@ -91,37 +107,37 @@ class UsersController extends Controller
 
         return view('users.login');
     }
-//    public function signin(Request $request){
-//        if($request->isMethod('post')){
-//            $data = $request->input();
-//            echo"<pre>"; print_r($data);
-//    }
-//    }
-//    public function signin(Request $request)
-//    {
-//        if ($request->isMethod('post')) {
-//            $data = $request->input();
-//
-//            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
-//                echo "XD";
-//                if (preg_match("/contact/i", session('current_url'))) {
-//                    session()->put('frontSession', $data['username']);
-//                    return redirect(session('current_url'));
-//                } else {
-//                    session()->put('frontSession', $data['username']);
-//                    return redirect('/phase/2');
-//                }
-//            } else {
-//                return redirect()->back()->with('flash_message_error', 'Invalid Username or Password');
-//            }
-//        }
-//    }
+    //    public function signin(Request $request){
+    //        if($request->isMethod('post')){
+    //            $data = $request->input();
+    //            echo"<pre>"; print_r($data);
+    //    }
+    //    }
+    //    public function signin(Request $request)
+    //    {
+    //        if ($request->isMethod('post')) {
+    //            $data = $request->input();
+    //
+    //            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
+    //                echo "XD";
+    //                if (preg_match("/contact/i", session('current_url'))) {
+    //                    session()->put('frontSession', $data['username']);
+    //                    return redirect(session('current_url'));
+    //                } else {
+    //                    session()->put('frontSession', $data['username']);
+    //                    return redirect('/phase/2');
+    //                }
+    //            } else {
+    //                return redirect()->back()->with('flash_message_error', 'Invalid Username or Password');
+    //            }
+    //        }
+    //    }
     public function phase2(Request $request)
     {
         if ($request->isMethod('post')) {
             $data = $request->all();
 
-            $userDetail = new UserDetail;
+            $userDetail = new UserDetail();
             $userDetail->user_id = Auth::user()['id'];
             $userDetail->skills = $data['skills'];
             $userDetail->city = $data['city'];
@@ -485,14 +501,31 @@ class UsersController extends Controller
     }
 
 
-//    public function login()
-//    {
-//        return view('users.login');
-//    }
-
+    //    public function login()
+    //    {
+    //        return view('users.login');
+    //    }
+    public function __construct()
+    {
+        $this->middleware('auth')->only('profile');
+    }
     public function profile()
     {
+
         return view('users.profile');
+    }
+
+//    public function search()
+//    {
+//
+//        return view('users.search');
+//    }
+
+    public function search()
+    {
+        $challenges = Challenge::with('author.details')->get();
+
+        return view('users.search', compact('challenges'));
     }
 
 }
