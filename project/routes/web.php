@@ -9,6 +9,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,10 @@ Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 Route::get('/addchallange', [ChallengeController::class, 'challenge']);
 
 
+Route::get('/message', [ChatController::class, 'index']);
+Route::post('/send', [ChatController::class, 'sendMessage']);
+Route::get('/received', [ChatController::class, 'showReceivedMessages'])->name('received-messages');
+
 
 
 Route::group(['middleware'=>['userslogin']],function(){
@@ -112,3 +117,5 @@ Route::any('/search', [UsersController::class, 'search'])->name('search');
 Route::get('/logout', [UsersController::class, 'logout']);
 
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
+
+
