@@ -2,6 +2,24 @@
 use App\Reply;
 ?>
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
+
+<div class="menubar">
+    <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
+    <a href="/search">Challenge search</a> &emsp;
+    <a href="/replies">Messages</a> &emsp;
+    <a href="/challange">Add challange</a> &emsp;
+    <a href="#">Update profile</a> &emsp;
+    <a href="/logout">Logout</a>
+</div>
+
+
     <div class="col-md-8">
 
 

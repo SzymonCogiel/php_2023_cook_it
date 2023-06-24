@@ -1,6 +1,24 @@
-<h1>Add challange for your friends!</h1>
 
-<h2>Add new challange:</h2>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
+
+<div class="menubar">
+    <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
+    <a href="/search">Challenge search</a> &emsp;
+    <a href="/replies">Messages</a> &emsp;
+    <a href="/challange">Add challange</a> &emsp;
+    <a href="#">Update profile</a> &emsp;
+    <a href="/logout">Logout</a>
+</div>
+
+
+<h2>Add challange for your friends!</h2>
+
+<h3>Add new challange:</h3>
 <form method="POST" action="{{ route('search') }}">
     <label for="dish">Dish name:</label><br>
     <input type="text" id="dish" name="dish"><br>
@@ -22,7 +40,7 @@
 <br>
 <br>
 
-<h2>Review challange</h2>
+<h3>Review challange</h3>
 <form>
 <table>
     <tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>

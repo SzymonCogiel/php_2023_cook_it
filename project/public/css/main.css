@@ -1,0 +1,36 @@
+
+
+body{
+    background-color: #F3CC72;
+    font-family:'Balthazar', serif;
+    color: #4f77caff;
+    text-shadow: 2px 2px 5px white;
+}
+
+h1{
+    font-size: 180px;
+}
+
+
+a, a:link, a:visited, a:hover, a:focus, a:active{
+    text-decoration: none;
+    font-size: 40px;
+    color: #4f77caff;
+}
+
+.description{
+    margin: 0;
+    background-image: url('../img/jedzenie.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    font-size: 35px;
+    text-align: center;
+    font-weight: bold;
+    padding: 30px;
+    width: available;
+    height: min-content;
+}
+
+.menubar{
+    text-align: center;
+}
