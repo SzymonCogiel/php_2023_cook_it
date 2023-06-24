@@ -51,13 +51,13 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 */
-Route::middleware(['admin'])->group(function () {
-    Route::get('admin/dashboard', [AdminController::class, 'dashboard']);
-    Route::get('/settings', [AdminController::class, 'settings']);
-    Route::get('admin/views_users', [UsersController::class, 'viewUsers']);
-    Route::post('/admin/update-user-status', [UsersController::class, 'updateUserStatus']);
-    Route::post('/admin/update-photo-status', [UsersController::class, 'updatePhotoStatus']);
-});
+//Route::middleware(['admin'])->group(function () {
+//    Route::get('admin/dashboard', [AdminController::class, 'dashboard']);
+//    Route::get('/settings', [AdminController::class, 'settings']);
+//    Route::get('admin/views_users', [UsersController::class, 'viewUsers']);
+//    Route::post('/admin/update-user-status', [UsersController::class, 'updateUserStatus']);
+//    Route::post('/admin/update-photo-status', [UsersController::class, 'updatePhotoStatus']);
+//});
 
 Route::match(['get','post'], '/admin', [AdminController::class, 'login']);
 
@@ -73,12 +73,14 @@ Route::any('/signin', [UsersController::class, 'signin'])->name('signin');
 
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 
-Route::get('/addchallange', [ChallengeController::class, 'challenge']);
+Route::any('/challenge', [ChallengeController::class, 'challenge'])->name('challenge');
 
 
 Route::get('/message', [ChatController::class, 'index']);
 Route::post('/send', [ChatController::class, 'sendMessage']);
 Route::get('/received', [ChatController::class, 'showReceivedMessages'])->name('received-messages');
+
+
 
 
 
@@ -99,7 +101,7 @@ Route::group(['middleware'=>['userslogin']],function(){
 
     Route::get('/shooted-messages',[UsersController::class, 'shootedMessages']);
 
-    Route::get('/replies', [UsersController::class, 'replies']);
+    //Route::get('/replies', [UsersController::class, 'replies']);
 
     Route::get('/delete-reply/{id}',[UsersController::class, 'deleteReply']);
 

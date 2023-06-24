@@ -10,8 +10,8 @@
 <div class="menubar">
     <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
     <a href="/search">Challenge search</a> &emsp;
-    <a href="/replies">Messages</a> &emsp;
-    <a href="/challange">Add challange</a> &emsp;
+    <a href="/received">Messages</a> &emsp;
+    <a href="/challenge">Add challange</a> &emsp;
     <a href="#">Update profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>

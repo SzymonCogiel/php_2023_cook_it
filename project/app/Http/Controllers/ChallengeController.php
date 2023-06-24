@@ -31,7 +31,7 @@ class ChallengeController extends Controller
             'Allergens' => 'required',
             'Level' => 'required',
             'Note' => 'required',
-            'Challenger' => 'required',
+            'Challenger' => 'nullable',
             'Photo' => 'nullable',
             'Status' => 'nullable',
             'Review' => 'nullable',
@@ -45,9 +45,10 @@ class ChallengeController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        Challenge::challenge($request->all());
+        //Challenge::challenge($request->all());
 
-        return redirect()->route('challenges.search')->with('success', 'Challenge created successfully.');
+        //return redirect()->route('challenges.search')->with('success', 'Challenge created successfully.');
+
     }
 
 

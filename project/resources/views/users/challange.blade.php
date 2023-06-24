@@ -9,8 +9,8 @@
 <div class="menubar">
     <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
     <a href="/search">Challenge search</a> &emsp;
-    <a href="/replies">Messages</a> &emsp;
-    <a href="/challange">Add challange</a> &emsp;
+    <a href="/received">Messages</a> &emsp;
+    <a href="/challenge">Add challange</a> &emsp;
     <a href="#">Update profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
@@ -19,19 +19,17 @@
 <h2>Add challange for your friends!</h2>
 
 <h3>Add new challange:</h3>
-<form method="POST" action="{{ route('search') }}">
+<form method="POST" action="{{ route('challenge') }}">
     <label for="dish">Dish name:</label><br>
     <input type="text" id="dish" name="dish"><br>
     <label for="skills">Skill level(0 - 10):</label><br>
     <input type="text" id="skills" name="skills" value="0"><br>
-    <label for="city">City:</label><br>
-    <input type="text" id="city" name="city"><br><br>
-    <label for="cost">Probably price:</label><br>
-    <input type="text" id="cost" name="cost" value="0"><br><br>
+    <label for="price">Probably price:</label><br>
+    <input type="text" id="price" name="price" value="0"><br><br>
     <label for="ingredients">Ingredients:</label><br>
     <input type="text" id="alergie" name="alergie"><br><br>
-    <label for="alergie">Allergens:</label><br>
-    <input type="text" id="alergie" name="alergie"><br><br>
+    <label for="alergens">Allergens:</label><br>
+    <input type="text" id="alergens" name="alergens"><br><br>
     <label for="note">Note from you:</label><br>
     <input type="textbox" id="note" name="note"><br><br>
     <input type="submit" value="Submit_add">
