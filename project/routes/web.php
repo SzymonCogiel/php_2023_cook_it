@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CommentController;
@@ -71,6 +72,10 @@ Route::any('/signin', [UsersController::class, 'signin'])->name('signin');
 
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 
+Route::get('/addchallange', [ChallengeController::class, 'challenge']);
+
+
+
 
 Route::group(['middleware'=>['userslogin']],function(){
 
@@ -103,7 +108,6 @@ Route::get('check-username',[UsersController::class, 'checkUsername']);
 Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 
 Route::any('/search', [UsersController::class, 'search'])->name('search');
-//Route::get('/search', [UserController::class, 'search']);
 
 Route::get('/logout', [UsersController::class, 'logout']);
 

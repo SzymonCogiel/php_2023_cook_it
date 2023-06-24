@@ -58,28 +58,28 @@ class UsersController extends Controller
         return view('users.register');
     }
 
-//    public function checkUsername(Request $request)
-//    {
-//        $data = $request->all();
-//        $usersCount = User::where('username', $data['username'])->count();
-//        if ($usersCount > 0) {
-//            echo 'false';
-//        } else {
-//            echo 'true';
-//        }
-//    }
+    //    public function checkUsername(Request $request)
+    //    {
+    //        $data = $request->all();
+    //        $usersCount = User::where('username', $data['username'])->count();
+    //        if ($usersCount > 0) {
+    //            echo 'false';
+    //        } else {
+    //            echo 'true';
+    //        }
+    //    }
 
-//    public function checkEmail(Request $request)
-//    {
-//        $data = $request->all();
-//        $usersCount = User::where('email', $data['email'])->count();
-//        if ($usersCount > 0) {
-//            echo 'false';
-//        } else {
-//            echo 'true';
-//        }
-//
-//    }
+    //    public function checkEmail(Request $request)
+    //    {
+    //        $data = $request->all();
+    //        $usersCount = User::where('email', $data['email'])->count();
+    //        if ($usersCount > 0) {
+    //            echo 'false';
+    //        } else {
+    //            echo 'true';
+    //        }
+    //
+    //    }
     public function signin(Request $request)
     {
         if (Auth::check()) {
@@ -515,11 +515,7 @@ class UsersController extends Controller
         return view('users.profile');
     }
 
-//    public function search()
-//    {
-//
-//        return view('users.search');
-//    }
+
 
     public function search()
     {
@@ -527,5 +523,6 @@ class UsersController extends Controller
 
         return view('users.search', compact('challenges'));
     }
+
 
 }
