@@ -67,10 +67,11 @@
             @csrf
             <table>
                 <tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
-                <tr><td>aaa</td><td>aaa</td><td>aaa</td><td><input type="text" id="accept" name="accept" value="N"><br><br></td><td>aaa</td><td><input type="textbox" id="review" name="review"><br><br></td><td><div class="form-group">
+                @foreach ($challangeAuthor as $key => $challenge)
+                <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Challenger }}</td><td>{{ $challenge->Level }}</td><td><input type="text" id="accept" name="accept" value="N"><br><br></td><td>{{ $challenge->FinalDate - $challenge->StartDate }}</td><td><input type="textbox" id="review" name="review"><br><br></td><td><div class="form-group">
                             {{ Form::file('image',array('class' => 'form-control')) }}
                         </div></td></tr>
-
+                @endforeach
                 <!--
                Uwaga na formularze, które updatują rekordy w bazie!!!! Dodać add photo do kolumny jeszcze!!!!!
                -->

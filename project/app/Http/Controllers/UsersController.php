@@ -516,8 +516,8 @@ class UsersController extends Controller
         $userDetail = UserDetail::where('user_id', Auth::id())->first();
         $userDetailUsername=User::where('id', Auth::id())->first();
 
-        $challangeHistory=Challenge::where('Challanger',$userDetailUsername->username);
-        $challangeAuthor=Challenge::where('Author',"".Auth::id());
+        $challangeHistory=Challenge::where('Challenger',$userDetailUsername->username)->get();
+        $challangeAuthor=Challenge::where('Author',$userDetailUsername->username)->get();
 
         return view('users.profile', ['userDetail' => $userDetail,'users' => $userDetailUsername, 'challangeHistory' => $challangeHistory, 'challangeAuthor' => $challangeAuthor]);
     }

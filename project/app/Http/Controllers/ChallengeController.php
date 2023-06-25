@@ -21,7 +21,10 @@ class ChallengeController extends Controller
         if (!Auth::check()){
             return redirect('/');
         }
-        return view('challenge');
+
+        $userDetailUsername=User::where('id', Auth::id())->first();
+        $challangeAuthor=Challenge::where('Author',$userDetailUsername->username)->get();
+        return view('challenge', ['challangeAuthor' => $challangeAuthor]);
     }
 
     public function sendChallange(Request $request)
@@ -44,12 +47,12 @@ class ChallengeController extends Controller
         ]);
 
         // Get the authenticated user's ID as the sender ID
-        $authorId = Auth::id();
+        $authorId = User::getUsernameofuser(Auth::id());
         $validatedData['Author'] = $authorId;
-        $validatedData['Challenger'] = 0;
-        $validatedData['Photo'] = 0;
-        $validatedData['Status'] = 0;
-        $validatedData['Review'] = 0;
+        $validatedData['Challenger'] = '';
+        $validatedData['Photo'] = '';
+        $validatedData['Status'] = '';
+        $validatedData['Review'] = '';
         $validatedData['StartDate'] = 0;
         $validatedData['FinalDate'] = 0;
         // echo "<pre>"; print_r($validatedData); die;
@@ -60,9 +63,13 @@ class ChallengeController extends Controller
     }
 
 
+
     public function search()
     {
-        $challenges = Challenge::with('author.details')->get();
+        $challenges = DB::table('challenges')
+            ->where('author', '!=', User::getUsernameofuser(Auth::id()))
+            ->where('challenger', 0)
+            ->get();
         return view('users.search', compact('challenges'));
     }
 
@@ -76,5 +83,14 @@ class ChallengeController extends Controller
         return redirect('/search');
     }
 
+    public function sendReview(Request $request)
+    {
+        $challengeReview = $request->all();
+
+        Challenge::where('id',$challengeReview)->update(['Status'=>$challengeReview->Status]);
+        //update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
+
+        return redirect('/challenge');
+    }
 
 }

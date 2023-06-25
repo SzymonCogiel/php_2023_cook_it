@@ -48,7 +48,7 @@
 <table>
     <tr><th>Name</th><th>Autor</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
     @foreach ($challangeHistory as $key => $challenge)
-    <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Author }}</td><td>{{ $challenge->Level }}</td><td>{{ $challenge->Status }}</td><td>{{ $challenge->FinalDate - $challenge->StartDate }}</td><td>{{ $challenge->Review }}</td><td>{{ $challenge->Photo }}</td></tr>
+    <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Author }}</td><td>{{ $challenge->Level }}</td><td>{{ $challenge->Status }}</td><td>{{ $challenge->FinalDate - $challenge->StartDate }}</td><td>{{ $challenge->Review }}</td><td>{{ $challenge->Photo ?? '' }}</td></tr>
     @endforeach
     <!--CSS: wiersze kolejnych wyzwań będą miały background kolor zależny od statusu:
      - zielony: po akceptacji autora
