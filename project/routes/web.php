@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require _DIR_.'/auth.php';
 
 Route::resource('/comments', CommentController::class);
 Route::resource('/books', BookController::class)->middleware(['auth']);
@@ -90,7 +90,7 @@ Route::get('/received', [ChatController::class, 'showReceivedMessages'])->name('
 Route::get('/sended', [ChatController::class, 'indexSend'])->name('sended');
 
 Route::get('/search', [ChallengeController::class, 'search'])->name('search');
-Route::get('/sendId', [ChallengeController::class, 'handleSendId']);
+Route::post('/sendId', [ChallengeController::class, 'sendID']);
 
 
 
@@ -129,7 +129,3 @@ Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 Route::get('/logout', [UsersController::class, 'logout']);
 
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
-
-
-
-

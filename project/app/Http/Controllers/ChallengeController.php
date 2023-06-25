@@ -52,11 +52,11 @@ class ChallengeController extends Controller
         $validatedData['Review'] = 0;
         $validatedData['StartDate'] = 0;
         $validatedData['FinalDate'] = 0;
-       // echo "<pre>"; print_r($validatedData); die;
+        // echo "<pre>"; print_r($validatedData); die;
         // Create a new challenge
-       Challenge::create($validatedData);
+        Challenge::create($validatedData);
 
-       return redirect('/challenge')->with('success', 'Challenge sent successfully.');
+        return redirect('/challenge')->with('success', 'Challenge sent successfully.');
     }
 
 
@@ -66,17 +66,12 @@ class ChallengeController extends Controller
         return view('users.search', compact('challenges'));
     }
 
-    public function handleSendId(Request $request)
+    public function sendID(Request $request)
     {
         $challengeId = $request->input('id');
 
         Challenge::where('id',$challengeId)->update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
-
-        // Wykonaj odpowiednie operacje na podstawie przesłanego ID wyzwania
-        // ...
-
-        // Przekieruj lub zwróć odpowiedź do przeglądarki
-        // ...
+        //update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
 
         return redirect('/search');
     }

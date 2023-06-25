@@ -27,6 +27,7 @@ return new class extends Migration
             $table-> string('travel');
             $table-> string('cost');
             $table-> string('alergie');
+            $table->string('points');
             $table->timestamps();
         });
 

@@ -144,6 +144,7 @@ class UsersController extends Controller
             $userDetail->cost = $data['cost'];
             $userDetail->travel = $data['travel'];
             $userDetail->alergie = $data['alergie'];
+            $userDetail->points = 0;
             $userDetail->save();
             return redirect('phase/3');
         }
@@ -512,7 +513,13 @@ class UsersController extends Controller
     public function profile()
     {
 
-        return view('users.profile');
+        $userDetail = UserDetail::where('user_id', Auth::id())->first();
+        $userDetailUsername=User::where('id', Auth::id())->first();
+
+        $challangeHistory=Challenge::where('Challanger',$userDetailUsername->username);
+        $challangeAuthor=Challenge::where('Author',"".Auth::id());
+
+        return view('users.profile', ['userDetail' => $userDetail,'users' => $userDetailUsername, 'challangeHistory' => $challangeHistory, 'challangeAuthor' => $challangeAuthor]);
     }
 
 

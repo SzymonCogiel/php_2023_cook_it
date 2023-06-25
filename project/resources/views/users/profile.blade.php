@@ -26,18 +26,18 @@
 <div class="content">
 <div class="up">
 <div class="left">
-<h2 id="Profile-name">Nickname </h2>
+<h2 id="Profile-name">{{ $users->username }}</h2>
 <br>
 <img src="#" alt="User's photo">
 </div>
 <div class="right">
 <h2>Description:</h2>
-<p><b>Points: </b> .....</p>
-<p><b>Cooking skill level: </b> ....</p>
-<p><b>City: </b> ....</p>
-<p><b>Availability to travel: </b> ....</p>
-<p><b>Max price to spend: </b> ....</p>
-<p><b>Allergies: </b> ....</p>
+<p><b>Points: </b> {{ $userDetail->points }}</p>
+<p><b>Cooking skill level: </b> {{ $userDetail->skills }}</p>
+<p><b>City: </b>{{ $userDetail->city }}</p>
+<p><b>Availability to travel: </b> {{ $userDetail->travel }}</p>
+<p><b>Max price to spend: </b> {{ $userDetail->cost }}</p>
+<p><b>Allergies: </b>{{ $userDetail->alergie }}</p>
 </div>
 </div>
 <br>
@@ -47,8 +47,9 @@
 <h3>Challenge history</h3>
 <table>
     <tr><th>Name</th><th>Autor</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
-    <tr><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td></tr>
-
+    @foreach ($challangeHistory as $key => $challenge)
+    <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Author }}</td><td>{{ $challenge->Level }}</td><td>{{ $challenge->Status }}</td><td>{{ $challenge->FinalDate - $challenge->StartDate }}</td><td>{{ $challenge->Review }}</td><td>{{ $challenge->Photo }}</td></tr>
+    @endforeach
     <!--CSS: wiersze kolejnych wyzwań będą miały background kolor zależny od statusu:
      - zielony: po akceptacji autora
      - czerwony: negatywna opinia autora
@@ -66,8 +67,9 @@
 <h3>Author's challenges</h3>
 <table>
     <tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
-    <tr><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td><td>aaa</td></tr>
-
+    @foreach ($challangeAuthor as $key => $challenge)
+        <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Challenger }}</td><td>{{ $challenge->Level }}</td><td>{{ $challenge->Status }}</td><td>{{ $challenge->FinalDate - $challenge->StartDate }}</td><td>{{ $challenge->Review }}</td><td>{{ $challenge->Photo }}</td></tr>
+    @endforeach
     <!--
 
 Komentarz jak wyżej

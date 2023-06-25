@@ -41,7 +41,7 @@
 <div class="col-md-6">
 
     <h3>Find new challenge</h3>
-    <p>Click on the challenge to take on new culinary challenges and meet other chefs!</p>
+    <p>Click on the submit button to take on new culinary challenges and meet other chefs!</p>
 
     @if($challenges->isEmpty())
         <p>No challenges found.</p>
@@ -78,6 +78,7 @@
                     <br>
                     <form method="POST" action="/sendId">
                         @csrf
+                        <label for="id"></label><br>
                         <input type="hidden" id="id" name="id" value="{{ $challenge->id }}">
                         <button type="submit">Submit</button>
                     </form>
