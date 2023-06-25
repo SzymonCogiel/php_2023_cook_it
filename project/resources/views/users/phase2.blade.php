@@ -1,4 +1,18 @@
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
+
+<div class="menubar">
+    <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
+</div>
+
+
+
+<div class="card">
 <form method="POST" action="{{ route('phase3') }}">
     @csrf
     <label for="skills">Your cooking skills (0 - 10):</label><br>
@@ -12,5 +26,6 @@
     <input type="cost" id="cost" name="cost" value="0"><br><br>
     <label for="alergie">What triggers your allergies:</label><br>
     <input type="text" id="alergie" name="alergie"><br><br>
-    <input type="submit" value="Submit">
+    <button type="submit"> Submit </button>
 </form>
+</div>

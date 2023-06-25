@@ -18,6 +18,11 @@ a, a:link, a:visited, a:hover, a:focus, a:active{
     color: #4f77caff;
 }
 
+
+label{
+    font-size: 20px;
+}
+
 .description{
     margin: 0;
     background-image: url('../img/jedzenie.jpg');
@@ -33,4 +38,94 @@ a, a:link, a:visited, a:hover, a:focus, a:active{
 
 .menubar{
     text-align: center;
+}
+
+.card{
+    background-color: #ffa130;
+    width: 300px;
+    border-radius: 5px;
+    align-content: center;
+    margin: 50px;
+    padding: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #462314;
+    box-shadow: 10px 20px 10px #888888;
+}
+
+button{
+    width: 100px;
+    height: 40px;
+    border: 1px solid #462314;
+    color: #4f77caff;
+    text-shadow: 2px 2px 5px white;
+    background-color: #ffeec3;
+    font-family:'Balthazar', serif;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: 0;
+    display: block;
+}
+
+.card-header > h2 {
+    text-align: center;
+    font-size: 40px;
+}
+
+.content{
+    display: grid;
+    grid-auto-rows: auto auto;
+}
+
+.up{
+    display: grid;
+    grid-auto-columns: auto auto;
+    grid-row:1;
+}
+.down{
+    grid-row:2;
+}
+
+.left{
+    grid-column: 1;
+}
+
+.right{
+    grid-column: 2;
+}
+
+#Profile-name{
+    text-align: center;
+}
+
+.messbar{
+    text-align: center;
+}
+
+.messbar > a{
+    font-size: 30px;
+}
+/*--------------TABLE----------------*/
+
+table{
+    border: 3px solid #462314;
+    background-color: #ffeec3;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr{
+    border: 2px solid #462314;
+}
+
+th, td{
+    border: 1px solid #462314;
+    width: 15%;
+    height: 30px;
+}
+
+th{
+   background-color: #ffa130;
+
 }

@@ -24,8 +24,12 @@
     <a href="#">Update profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
+<br>
+<hr>
 
-
+<div class="up">
+<div class="left">
+    <div class="card">
 <h2>Add challange for your friends!</h2>
 <div>
 <h3>Add new challange:</h3>
@@ -52,21 +56,30 @@
          <button type="submit">Send</button>
     </form>
 </div>
-<br>
-<br>
+</div>
+</div>
 
-{{--<h3>Review challange</h3>--}}
-{{--<form>--}}
-{{--    @csrf--}}
-{{--<table>--}}
-{{--    <tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>--}}
-{{--    <tr><td>aaa</td><td>aaa</td><td>aaa</td><td><input type="text" id="accept" name="accept" value="N"><br><br></td><td>aaa</td><td><input type="textbox" id="review" name="review"><br><br></td><td>aaa</td></tr>--}}
+<div class="right">
+    <br>
+    <br>
+<h3>Review challange</h3>
+<form>
+@csrf
+<table>
+<tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
+<tr><td>aaa</td><td>aaa</td><td>aaa</td><td><input type="text" id="accept" name="accept" value="N"><br><br></td><td>aaa</td><td><input type="textbox" id="review" name="review"><br><br></td><td><div class="form-group">
+            {{ Form::file('image',array('class' => 'form-control')) }}
+        </div></td></tr>
 
-{{--    <!----}}
-{{--Uwaga na formularze, które updatują rekordy w bazie!!!!--}}
-{{--   -->--}}
+ <!--
+Uwaga na formularze, które updatują rekordy w bazie!!!! Dodać add photo do kolumny jeszcze!!!!!
+-->
 
-{{--</table>--}}
-{{--<input type="submit" value="Submit_review">--}}
-{{--</form>--}}
+</table>
+    <br>
+    <button type="submit"> Submit review</button>
+</form>
+</div>
+
+</div>
 </html>

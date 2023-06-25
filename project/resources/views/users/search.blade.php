@@ -25,6 +25,8 @@
     <a href="#">Update profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
+<br>
+<hr>
 
 <div class="col-md-6">
 

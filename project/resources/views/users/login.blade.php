@@ -1,3 +1,19 @@
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
+
+<div class="menubar">
+    <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
+</div>
+
+
+
+
 @if($errors->has('error'))
     <div class="alert alert-danger">
         {{ $errors->first('error') }}
@@ -8,7 +24,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header"><h2>{{ __('Login') }}</h2></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('signin') }}">
@@ -27,7 +43,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <br>
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
@@ -41,7 +57,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        <br>
                         <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
@@ -56,6 +72,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
+                                <br>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>

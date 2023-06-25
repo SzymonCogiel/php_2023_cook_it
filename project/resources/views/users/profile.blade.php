@@ -15,26 +15,35 @@
     <a href="#">Update profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
+<br>
+<hr>
+
+<br>
+<br>
+<br>
 
 
-<h2>Nickname </h2>
+<div class="content">
+<div class="up">
+<div class="left">
+<h2 id="Profile-name">Nickname </h2>
 <br>
 <img src="#" alt="User's photo">
-<br>
-<br>
-<br>
-<h3>Description:</h3>
+</div>
+<div class="right">
+<h2>Description:</h2>
 <p><b>Points: </b> .....</p>
 <p><b>Cooking skill level: </b> ....</p>
 <p><b>City: </b> ....</p>
 <p><b>Availability to travel: </b> ....</p>
 <p><b>Max price to spend: </b> ....</p>
 <p><b>Allergies: </b> ....</p>
-
+</div>
+</div>
 <br>
 <br>
 <br>
-
+<div class="down">
 <h3>Challenge history</h3>
 <table>
     <tr><th>Name</th><th>Autor</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
@@ -65,3 +74,5 @@ Komentarz jak wyżej
    -->
 
 </table>
+</div>
+</div>

@@ -12,9 +12,13 @@
 <a href="/signup">Sign Up</a>
 </div>
 
+<br>
+<hr>
+<br>
+
 <div class="description">
 <p>
-    Do you have that you would like to cook something, but you have no idea what, so you give up on it completely? <br>
+    Do you have feeling that you would like to cook something, but you have no idea what, so you give up on it completely? <br>
     Or that you'd like to finally talk to someone about whether basil pesto is better than tomato pesto, <br>
     but your friends only talk about the superiority of Python over C++? <br>
     Or just to get an honest opinion on your dishes, <br>

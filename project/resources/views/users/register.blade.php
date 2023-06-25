@@ -1,8 +1,23 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
+
+<div class="menubar">
+    <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
+</div>
+
+
+
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header"><h2>{{ __('Register') }}</h2></div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf

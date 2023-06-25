@@ -1,6 +1,20 @@
-<div class="col-md-8 showcase">
 
-    <h1>Photos</h1>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{asset('css/main.css')}}">
+
+
+<div class="menubar">
+    <h1> <img src="{{asset('img/cookit2.png')}}" height="180px"/> CookIT</h1>
+</div>
+
+
+
+<div class="card">
+
+    <h2>Photos</h2>
 
 
     @if(Session::has('flash_message_error'))
@@ -18,7 +32,7 @@
 
 
 
-    <h1><strong>You can upload your pictures here</strong></h1>
+    <h3><strong>You can upload your pictures here</strong></h3>
 
     <form method ="POST" action = "{{ route('phase3') }}">
     <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
