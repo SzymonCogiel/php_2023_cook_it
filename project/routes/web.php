@@ -77,13 +77,20 @@ Route::get('/challenge', [ChallengeController::class, 'indexChallange']);
 Route::post('/sendChallange', [ChallengeController::class, 'sendChallange']);
 
 
+
+
+
+
+
 Route::get('/message', [ChatController::class, 'index']);
 Route::post('/send', [ChatController::class, 'sendMessage']);
 
 
 Route::get('/received', [ChatController::class, 'showReceivedMessages'])->name('received-messages');
-
 Route::get('/sended', [ChatController::class, 'indexSend'])->name('sended');
+
+Route::get('/search', [ChallengeController::class, 'search'])->name('search');
+Route::get('/sendId', [ChallengeController::class, 'handleSendId']);
 
 
 
@@ -119,10 +126,10 @@ Route::get('check-username',[UsersController::class, 'checkUsername']);
 
 Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 
-Route::any('/search', [UsersController::class, 'search'])->name('search');
-
 Route::get('/logout', [UsersController::class, 'logout']);
 
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
+
+
 
 

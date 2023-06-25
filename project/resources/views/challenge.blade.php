@@ -1,13 +1,13 @@
 <html>
-{{--@if ($errors->any())--}}
-{{--    <div class="alert alert-danger">--}}
-{{--        <ul>--}}
-{{--            @foreach ($errors->all() as $error)--}}
-{{--                <li>{{ $error }}</li>--}}
-{{--            @endforeach--}}
-{{--        </ul>--}}
-{{--    </div>--}}
-{{--@endif--}}
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

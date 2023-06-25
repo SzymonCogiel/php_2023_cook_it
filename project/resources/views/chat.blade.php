@@ -41,14 +41,14 @@
     </div>
 @endif
 
-<div>
-    <h3>Messages</h3>
-    <ul>
-        @foreach ($messages as $message)
-            <li>{{ $message->sender }} to {{ $message->receiver }}: {{ $message->message }}</li>
-        @endforeach
-    </ul>
-</div>
+{{--<div>--}}
+{{--    <h3>Messages</h3>--}}
+{{--    <ul>--}}
+{{--        @foreach ($messages as $message)--}}
+{{--            <li>{{ $message->sender }} to {{ $message->receiver }}: {{ $message->message }}</li>--}}
+{{--        @endforeach--}}
+{{--    </ul>--}}
+{{--</div>--}}
 
 <div class="card">
     <div class="card-header"><h2>Send Message</h2></div>

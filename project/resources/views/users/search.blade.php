@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <html>
 <head>
     <title>Search</title>
@@ -66,7 +76,11 @@
                     <p class="left">FinalDate:</p>
                     <p class="right">{{ $challenge->FinalDate}}</p>
                     <br>
-                    <br>
+                    <form method="POST" action="/sendId">
+                        @csrf
+                        <input type="hidden" id="id" name="id" value="{{ $challenge->id }}">
+                        <button type="submit">Submit</button>
+                    </form>
                     <br>
                 </div>
             </div>
@@ -75,7 +89,7 @@
         <div class="navigation-buttons">
             <button onclick="showPreviousChallenge()">Previous</button>
             <button onclick="showNextChallenge()">Next</button>
-            <button onclick="acceptChallenge()">Submit</button>
+
         </div>
     @endif
 
@@ -104,9 +118,8 @@
             showChallenge(previousIndex);
         }
 
-        function acceptChallenge(){
 
-        }
+
     </script>
 </div>
 </body>

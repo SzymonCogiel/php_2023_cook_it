@@ -66,5 +66,20 @@ class ChallengeController extends Controller
         return view('users.search', compact('challenges'));
     }
 
+    public function handleSendId(Request $request)
+    {
+        $challengeId = $request->input('id');
+
+        Challenge::where('id',$challengeId)->update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
+
+        // Wykonaj odpowiednie operacje na podstawie przesłanego ID wyzwania
+        // ...
+
+        // Przekieruj lub zwróć odpowiedź do przeglądarki
+        // ...
+
+        return redirect('/search');
+    }
+
 
 }
