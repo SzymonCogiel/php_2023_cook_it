@@ -1,13 +1,12 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
-use PharIo\Manifest\Author;
 
 class Challenge extends Model
 {
-    use HasFactory;
+
 
     protected $fillable = [
         'Author',
@@ -24,12 +23,6 @@ class Challenge extends Model
         'StartDate',
         'FinalDate',
     ];
-
-    public function author()
-    {
-        return $this->belongsTo(\App\Models\Author::class);
-    }
-
 
 
 }

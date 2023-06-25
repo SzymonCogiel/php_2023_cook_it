@@ -2,54 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Challenge;
 use App\Models\User;
-use App\Models\UserDetail;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Models\Challenge;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
+
+
 
 class ChallengeController extends Controller
 {
-    public function search()
+
+
+    public function indexChallange()
     {
-        $challenges = Challenge::with('author.details')->get();
-        return view('users.search', compact('challenges'));
+
+        if (!Auth::check()){
+            return redirect('/');
+        }
+        return view('challenge');
     }
 
-    public function challenge()
+    public function sendChallange(Request $request)
     {
-        return view('users.challange');
-    }
 
-    public function store(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-            'Author' => 'required',
+        // Validate the request data
+        $validatedData = $request->validate([
             'Dish' => 'required',
             'Price' => 'required',
             'Ingredients' => 'required',
             'Allergens' => 'required',
             'Level' => 'required',
             'Note' => 'required',
-            'Challenger' => 'nullable',
-            'Photo' => 'nullable',
-            'Status' => 'nullable',
-            'Review' => 'nullable',
-            'StartDate' => 'nullable',
-            'FinalDate' => 'nullable',
-
-
+            'Challenger' => '',
+            'Photo' => '',
+            'Status' => '',
+            'Review' => '',
+            'StartDate' => '',
+            'FinalDate' => '',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
+        // Get the authenticated user's ID as the sender ID
+        $authorId = Auth::id();
+        $validatedData['Author'] = $authorId;
+        $validatedData['Challenger'] = 0;
+        $validatedData['Photo'] = 0;
+        $validatedData['Status'] = 0;
+        $validatedData['Review'] = 0;
+        $validatedData['StartDate'] = 0;
+        $validatedData['FinalDate'] = 0;
+       // echo "<pre>"; print_r($validatedData); die;
+        // Create a new challenge
+       Challenge::create($validatedData);
 
-        //Challenge::challenge($request->all());
-
-        //return redirect()->route('challenges.search')->with('success', 'Challenge created successfully.');
-
+       return redirect('/challenge')->with('success', 'Challenge sent successfully.');
     }
+
 
 
 }

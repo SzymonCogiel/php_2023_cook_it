@@ -44,7 +44,7 @@ class ChatController extends Controller
 
             // Create a new message
 
-
+           // echo "<pre>"; print_r($validatedData);
             if (DB::table('users')->where('username', $validatedData['receiver'])->exists()) {
                 Message::create($validatedData);
                 return redirect('/message')->with('success', 'Message sent successfully.');

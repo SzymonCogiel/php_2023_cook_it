@@ -73,11 +73,14 @@ Route::any('/signin', [UsersController::class, 'signin'])->name('signin');
 
 Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 
-Route::any('/challenge', [ChallengeController::class, 'challenge'])->name('challenge');
+Route::get('/challenge', [ChallengeController::class, 'indexChallange']);
+Route::post('/sendChallange', [ChallengeController::class, 'sendChallange']);
 
 
 Route::get('/message', [ChatController::class, 'index']);
 Route::post('/send', [ChatController::class, 'sendMessage']);
+
+
 Route::get('/received', [ChatController::class, 'showReceivedMessages'])->name('received-messages');
 
 
