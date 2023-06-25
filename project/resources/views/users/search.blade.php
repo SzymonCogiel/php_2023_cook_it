@@ -65,6 +65,9 @@
                     <p class="right">{{ $challenge->StartDate}}</p>
                     <p class="left">FinalDate:</p>
                     <p class="right">{{ $challenge->FinalDate}}</p>
+                    <br>
+                    <br>
+                    <br>
                 </div>
             </div>
         @endforeach
@@ -72,6 +75,7 @@
         <div class="navigation-buttons">
             <button onclick="showPreviousChallenge()">Previous</button>
             <button onclick="showNextChallenge()">Next</button>
+            <button onclick="acceptChallenge()">Submit</button>
         </div>
     @endif
 
@@ -98,6 +102,10 @@
         function showPreviousChallenge() {
             var previousIndex = currentChallengeIndex - 1;
             showChallenge(previousIndex);
+        }
+
+        function acceptChallenge(){
+
         }
     </script>
 </div>

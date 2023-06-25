@@ -60,5 +60,11 @@ class ChallengeController extends Controller
     }
 
 
+    public function search()
+    {
+        $challenges = Challenge::with('author.details')->get();
+        return view('users.search', compact('challenges'));
+    }
+
 
 }

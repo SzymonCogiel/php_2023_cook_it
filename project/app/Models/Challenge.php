@@ -24,5 +24,10 @@ class Challenge extends Model
         'FinalDate',
     ];
 
+    public function author()
+    {
+        return $this->belongsTo(\App\Models\Author::class);
+    }
+
 
 }

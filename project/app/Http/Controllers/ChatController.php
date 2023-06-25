@@ -20,9 +20,8 @@ class ChatController extends Controller
         if (!Auth::check()){
             return redirect('/');
         }
-        // Fetch all messages
-        $messages = Message::all();
 
+        $messages = Message::all();
 
 
         return view('chat', compact('messages'));
@@ -62,6 +61,20 @@ class ChatController extends Controller
 
         //echo "<pre>"; print_r($receivedMessages); die;
         return view('received-messages', ['receivedMessages' => $receivedMessages]);
+    }
+
+
+    public function indexSend()
+    {
+
+        if (!Auth::check()){
+            return redirect('/');
+        }
+
+
+        $messages = DB::table('messages')->where('sender', User::getUsernameofuser(Auth::id()))->get();
+
+        return view('sended', compact('messages'));
     }
 
 

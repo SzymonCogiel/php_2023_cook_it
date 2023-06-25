@@ -83,6 +83,8 @@ Route::post('/send', [ChatController::class, 'sendMessage']);
 
 Route::get('/received', [ChatController::class, 'showReceivedMessages'])->name('received-messages');
 
+Route::get('/sended', [ChatController::class, 'indexSend'])->name('sended');
+
 
 
 

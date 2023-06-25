@@ -26,7 +26,7 @@
 <div class="messbar">
     <a href="/message">New</a> &emsp;
     <a href="/received">Received</a> &emsp;
-    <a href="/send">Send</a> &emsp;
+    <a href="/sended">Send</a> &emsp;
 </div>
 
 
