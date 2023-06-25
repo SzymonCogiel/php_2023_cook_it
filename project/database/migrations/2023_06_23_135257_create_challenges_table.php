@@ -18,7 +18,7 @@ class CreateChallengesTable extends Migration
             $table->string('Level');
             $table->string('Note');
             $table->string('Challenger');
-            $table->string('Photo');
+            $table->binary('Photo');
             $table->string('Status');
             $table->string('Review');
             $table->string('StartDate');

@@ -92,7 +92,7 @@ Route::get('/sended', [ChatController::class, 'indexSend'])->name('sended');
 Route::get('/search', [ChallengeController::class, 'search'])->name('search');
 Route::post('/sendId', [ChallengeController::class, 'sendID']);
 
-
+Route::post('/sendReview', [ChallengeController::class, 'sendReview']);
 
 
 

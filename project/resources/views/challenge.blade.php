@@ -63,18 +63,30 @@
         <br>
         <br>
         <h3>Review challange</h3>
-        <form>
+        <form method="POST" action="/sendReview" enctype="multipart/form-data">
             @csrf
             <table>
                 <tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
                 @foreach ($challangeAuthor as $key => $challenge)
-                <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Challenger }}</td><td>{{ $challenge->Level }}</td><td><input type="text" id="accept" name="accept" value="N"><br><br></td><td>{{ $challenge->FinalDate - $challenge->StartDate }}</td><td><input type="textbox" id="review" name="review"><br><br></td><td><div class="form-group">
-                            {{ Form::file('image',array('class' => 'form-control')) }}
-                        </div></td></tr>
+                <tr>
+                    <td>{{ $challenge->Dish }}</td>
+                    <td>{{ $challenge->Challenger }}</td>
+                    <td>{{ $challenge->Level }}</td>
+                    <td>
+                        <label for="Status"></label>
+                        <input type="text" id="Status" name="Status" value="N"><br><br></td>
+                    <td>{{ $challenge->FinalDate - $challenge->StartDate }}</td>
+                    <td>
+                        <label for="Review"></label>
+                        <input type="textbox" id="Review" name="Review"><br><br></td>
+                    <td>
+                        <label for="image"></label>
+                        <input type="file" name="image" id="image">
+                    </td>
+                    <label for="id"></label>
+                    <input type="hidden" id="id" name="id" value="{{ $challenge->id }}"><br><br>
+                </tr>
                 @endforeach
-                <!--
-               Uwaga na formularze, które updatują rekordy w bazie!!!! Dodać add photo do kolumny jeszcze!!!!!
-               -->
 
             </table>
             <br>

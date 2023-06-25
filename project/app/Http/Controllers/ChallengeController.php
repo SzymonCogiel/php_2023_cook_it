@@ -8,22 +8,17 @@ use App\Models\Challenge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-
-
-
 class ChallengeController extends Controller
 {
-
-
     public function indexChallange()
     {
 
-        if (!Auth::check()){
+        if (!Auth::check()) {
             return redirect('/');
         }
 
         $userDetailUsername=User::where('id', Auth::id())->first();
-        $challangeAuthor=Challenge::where('Author',$userDetailUsername->username)->get();
+        $challangeAuthor=Challenge::where('Author', $userDetailUsername->username)->get();
         return view('challenge', ['challangeAuthor' => $challangeAuthor]);
     }
 
@@ -77,7 +72,7 @@ class ChallengeController extends Controller
     {
         $challengeId = $request->input('id');
 
-        Challenge::where('id',$challengeId)->update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
+        Challenge::where('id', $challengeId)->update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
         //update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
 
         return redirect('/search');
@@ -86,9 +81,17 @@ class ChallengeController extends Controller
     public function sendReview(Request $request)
     {
         $challengeReview = $request->all();
+        $image = base64_encode($request['image']);
+        $img =  $request->file('image');
+        //echo "<pre>"; echo $img; die;
+        $imagePath = $img->store('/img');
+        if ($img) {
 
-        Challenge::where('id',$challengeReview)->update(['Status'=>$challengeReview->Status]);
-        //update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
+        }else
+        {
+            $imagePath='';
+        }
+        Challenge::where('id', $challengeReview['id'])->update(['Status'=>$challengeReview['Status'], 'Review'=>$challengeReview['Review'], 'Photo'=>$imagePath]);
 
         return redirect('/challenge');
     }

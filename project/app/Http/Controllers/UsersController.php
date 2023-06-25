@@ -519,6 +519,9 @@ class UsersController extends Controller
         $challangeHistory=Challenge::where('Challenger',$userDetailUsername->username)->get();
         $challangeAuthor=Challenge::where('Author',$userDetailUsername->username)->get();
 
+        //$challenge = DB::table('challenges')->where('id', $challengeId)->first();
+        //echo  $challangeAuthor[0]->Photo ; die;
+
         return view('users.profile', ['userDetail' => $userDetail,'users' => $userDetailUsername, 'challangeHistory' => $challangeHistory, 'challangeAuthor' => $challangeAuthor]);
     }
 
