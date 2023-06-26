@@ -34,11 +34,12 @@
 
     <h3><strong>You can upload your pictures here</strong></h3>
 
-    <form method ="POST" action = "{{ route('phase3') }}">
+    <form method="POST" action="/sendPhoto">
+        @csrf
     <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
     <div class="form-group">
-        {{ Form::label('image', 'Image') }}
-        {{ Form::file('image',array('class' => 'form-control')) }}
+        <label for="photo"></label>
+        <input type="file" name="photo" id="photo">
     </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

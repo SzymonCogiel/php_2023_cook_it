@@ -28,6 +28,7 @@ return new class extends Migration
             $table-> string('cost');
             $table-> string('alergie')->nullable();
             $table->string('points');
+            $table->string('photo');
             $table->timestamps();
         });
 

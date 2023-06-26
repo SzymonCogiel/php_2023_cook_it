@@ -76,6 +76,7 @@ Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
 Route::get('/challenge', [ChallengeController::class, 'indexChallange']);
 Route::post('/sendChallange', [ChallengeController::class, 'sendChallange']);
 
+Route::post('/sendPhoto', [UsersController::class, 'sendPhoto']);
 
 
 
@@ -101,7 +102,7 @@ Route::group(['middleware'=>['userslogin']],function(){
 
     Route::get('/inreview', [UsersController::class, 'inreview']);
 
-    Route::any('/phase/3', [UsersController::class, 'phase3']);
+    //Route::any('/phase/3', [UsersController::class, 'phase3']);
 
     Route::post('/photoupload',[UsersController::class, 'postphoto']);
 

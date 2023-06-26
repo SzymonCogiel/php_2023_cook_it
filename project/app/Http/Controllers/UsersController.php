@@ -151,6 +151,7 @@ class UsersController extends Controller
             $userDetail->travel = $data['travel'];
             $userDetail->alergie = $data['alergie'];
             $userDetail->points = 0;
+            $userDetail->photo = '';
             $userDetail->save();
             return redirect('phase/3');
         }
@@ -540,5 +541,22 @@ class UsersController extends Controller
 
         return view('users.search', compact('challenges'));
     }
+    public function sendPhoto(Request $request)
+    {
+        $userId = $request->input('id');
+        $request->validate([
+            'photo' => 'required|image',
+        ]);
+        echo "<pre>"; print_r($userId); die;
+        $path = $request->file('photo')->store('public/photos');
 
+        $userDetail = new UserDetail();
+        $userDetail->id = Auth::user()->id;
+        $userDetail->photo = $path;
+
+        $newpath = substr($path,6);
+        $userDetail->update();
+        Challenge::where('id', $userId)->update(['photo'=>$newpath]);
+        return redirect('/profile')->with('success', 'Zdjęcie zostało dodane.');
+    }
 }

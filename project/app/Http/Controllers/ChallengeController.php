@@ -117,7 +117,7 @@ class ChallengeController extends Controller
         $newpath = substr($path,6);
         $challangeDetail->update();
         Challenge::where('id', $challengeId)->update(['Photo'=>$newpath]);
-        return redirect('/')->with('success', 'Zdjęcie zostało dodane.');
+        return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
     }
 
 }
