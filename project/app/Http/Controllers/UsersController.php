@@ -113,8 +113,7 @@ class UsersController extends Controller
 
         return view('users.phase2');
     }
-       return view('users.phase2')->with(compact('countries', 'languages', 'hobbies'));
-    //    }
+
 
     public function logout()
     {
