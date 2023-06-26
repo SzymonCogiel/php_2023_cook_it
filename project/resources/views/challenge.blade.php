@@ -15,7 +15,6 @@ use Carbon\Carbon;
     <a href="/search">Challenge search</a> &emsp;
     <a href="/received">Messages</a> &emsp;
     <a href="/challenge">Add challange</a> &emsp;
-    <a href="#">Update profile</a> &emsp;
     <a href="/profile">My profile</a>
     <a href="/logout">Logout</a>
 </div>

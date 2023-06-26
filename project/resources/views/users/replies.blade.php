@@ -15,7 +15,7 @@ use App\Reply;
     <a href="/search">Challenge search</a> &emsp;
     <a href="/replies">Messages</a> &emsp;
     <a href="/challange">Add challange</a> &emsp;
-    <a href="#">Update profile</a> &emsp;
+    <a href="/profile">My profile</a>
     <a href="/logout">Logout</a>
 </div>
 
