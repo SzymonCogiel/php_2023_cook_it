@@ -524,8 +524,8 @@ class UsersController extends Controller
         $userDetailUsername=User::where('id', Auth::id())->first();
 
 
-        $challangeHistory=Challenge::where('Challenger',$userDetailUsername->username)->get();
-        $challangeAuthor=Challenge::where('Author',$userDetailUsername->username)->get();
+        $challangeHistory=Challenge::where('Challenger', $userDetailUsername->username)->get();
+        $challangeAuthor=Challenge::where('Author', $userDetailUsername->username)->get();
 
         //$challenge = DB::table('challenges')->where('id', $challengeId)->first();
         //echo  $challangeAuthor[0]->Photo ; die;
@@ -543,20 +543,21 @@ class UsersController extends Controller
     }
     public function sendPhoto(Request $request)
     {
-        $userId = $request->input('id');
         $request->validate([
             'photo' => 'required|image',
         ]);
-        echo "<pre>"; print_r($userId); die;
-        $path = $request->file('photo')->store('public/photos');
 
-        $userDetail = new UserDetail();
+        $path = $request->file('photo')->store('public/photos');
+        $userDetail=new UserDetail();
         $userDetail->id = Auth::user()->id;
         $userDetail->photo = $path;
-
-        $newpath = substr($path,6);
+        //echo  $path; die;
+        $newPath = substr($path, 6);
+        //echo  Auth::user()->id; die;
         $userDetail->update();
-        Challenge::where('id', $userId)->update(['photo'=>$newpath]);
+        UserDetail::where('user_id',Auth::user()->id)->update(['photo'=>$newPath]);
+
+
         return redirect('/profile')->with('success', 'Zdjęcie zostało dodane.');
     }
 }

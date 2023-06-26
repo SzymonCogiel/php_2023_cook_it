@@ -31,7 +31,7 @@ use Carbon\Carbon;
         <div class="left">
             <h2 id="Profile-name">{{ $users->username }}</h2>
             <br>
-            <img src="#" alt="User's photo">
+            <img src="{{ Storage::url($userDetail->photo) }}" width="200" height="200" alt="User's photo">
         </div>
         <div class="right">
             <h2>Description:</h2>

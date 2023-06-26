@@ -103,9 +103,12 @@ class ChallengeController extends Controller
 
     public function sendReview(Request $request)
     {
+        $challangeReview = $request->all();
         $challengeId = $request->input('id');
         $request->validate([
             'Photo' => 'required|image',
+            'Status' => '',
+
         ]);
 
         $path = $request->file('Photo')->store('public/photos');
@@ -116,7 +119,7 @@ class ChallengeController extends Controller
         //echo "<pre>"; print_r($path); die;
         $newpath = substr($path,6);
         $challangeDetail->update();
-        Challenge::where('id', $challengeId)->update(['Photo'=>$newpath]);
+        Challenge::where('id', $challengeId)->update(['Status'=>$challangeReview['Status'],'Review'=>$challangeReview['Review'],'Photo'=>$newpath]);
         return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
     }
 

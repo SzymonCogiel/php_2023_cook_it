@@ -34,7 +34,7 @@
 
     <h3><strong>You can upload your pictures here</strong></h3>
 
-    <form method="POST" action="/sendPhoto">
+    <form method="POST" action="/sendPhoto" enctype="multipart/form-data">
         @csrf
     <input type="hidden" name="user_id" value="{{ Auth::User()->id }}">
     <div class="form-group">

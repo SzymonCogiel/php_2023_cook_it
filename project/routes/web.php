@@ -128,4 +128,3 @@ Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 
 Route::get('/logout', [UsersController::class, 'logout']);
 
-Route::get('/profile', [UsersController::class, 'profile'])->name('profile');
