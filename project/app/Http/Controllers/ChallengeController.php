@@ -61,7 +61,7 @@ class ChallengeController extends Controller
     {
         $challenges = DB::table('challenges')
             ->where('author', '!=', User::getUsernameofuser(Auth::id()))
-            ->where('challenger', 0)
+            ->where('challenger', '')
             ->get();
         return view('users.search', compact('challenges'));
     }
@@ -96,7 +96,7 @@ class ChallengeController extends Controller
         $challangeDetail = new Challenge();
         $challangeDetail->id = Auth::user()->id;
         $challangeDetail->Photo = $path;
-        
+
         $newpath = substr($path,6);
         $challangeDetail->update();
         Challenge::where('id', $challengeId)->update(['Status'=>$challangeReview['Status'],'Review'=>$challangeReview['Review'],'Photo'=>$newpath]);
