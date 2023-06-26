@@ -135,7 +135,13 @@ class UsersController extends Controller
     public function phase2(Request $request)
     {
         if ($request->isMethod('post')) {
-            $data = $request->all();
+            $data = $request->validate([
+                'skills' => 'required',
+                'city' => 'required|not_in:0',
+                'cost' => 'required',
+                'travel' => 'required',
+                'alergie' => '',
+            ]);
 
             $userDetail = new UserDetail();
             $userDetail->user_id = Auth::user()['id'];
@@ -516,6 +522,7 @@ class UsersController extends Controller
         $userDetail = UserDetail::where('user_id', Auth::id())->first();
         $userDetailUsername=User::where('id', Auth::id())->first();
 
+
         $challangeHistory=Challenge::where('Challenger',$userDetailUsername->username)->get();
         $challangeAuthor=Challenge::where('Author',$userDetailUsername->username)->get();
 
@@ -533,6 +540,5 @@ class UsersController extends Controller
 
         return view('users.search', compact('challenges'));
     }
-
 
 }

@@ -1,3 +1,6 @@
+<?php
+use Carbon\Carbon;
+?>
 <html>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,24 +107,24 @@
             <table>
                 <tr><th>Name</th><th>Challanger</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
                 @foreach ($challangeAuthor as $key => $challenge)
-                <tr>
-                    <td>{{ $challenge->Dish }}</td>
-                    <td>{{ $challenge->Challenger }}</td>
-                    <td>{{ $challenge->Level }}</td>
-                    <td>
-                        <label for="Status"></label>
-                        <input type="text" id="Status" name="Status" value="N"><br><br></td>
-                    <td>{{ $challenge->FinalDate - $challenge->StartDate }}</td>
-                    <td>
-                        <label for="Review"></label>
-                        <input type="textbox" id="Review" name="Review"><br><br></td>
-                    <td>
-                        <label for="image"></label>
-                        <input type="file" name="image" id="image">
-                    </td>
-                    <label for="id"></label>
-                    <input type="hidden" id="id" name="id" value="{{ $challenge->id }}"><br><br>
-                </tr>
+                    <tr>
+                        <td>{{ $challenge->Dish }}</td>
+                        <td>{{ $challenge->Challenger }}</td>
+                        <td>{{ $challenge->Level }}</td>
+                        <td>
+                            <label for="Status"></label>
+                            <input type="text" id="Status" name="Status" value="N"><br><br></td>
+                        <td>{{ \Carbon\Carbon::parse($challenge->FinalDate)->diffInDays(\Carbon\Carbon::parse($challenge->StartDate)) }}</td>
+                        <td>
+                            <label for="Review"></label>
+                            <input type="textbox" id="Review" name="Review"><br><br></td>
+                        <td>
+                            <label for="Photo"></label>
+                            <input type="file" name="Photo" id="Photo">
+                        </td>
+                        <label for="id"></label>
+                        <input type="hidden" id="id" name="id" value="{{ $challenge->id }}"><br><br>
+                    </tr>
                 @endforeach
 
             </table>

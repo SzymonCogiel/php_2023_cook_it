@@ -95,7 +95,6 @@ Route::post('/sendId', [ChallengeController::class, 'sendID']);
 Route::post('/sendReview', [ChallengeController::class, 'sendReview']);
 
 
-
 Route::group(['middleware'=>['userslogin']],function(){
 
     Route::any('/phase/2', [UsersController::class, 'phase2'])->name('phase3');

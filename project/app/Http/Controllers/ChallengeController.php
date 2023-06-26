@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use App\Models\Challenge;
 use Illuminate\Support\Facades\Auth;
@@ -82,22 +83,41 @@ class ChallengeController extends Controller
         return redirect('/search');
     }
 
+//    public function sendReview(Request $request)
+//    {
+//        $challengeReview = $request->all();
+//        $image = base64_encode($request['image']);
+//        $img =  $request->file('image');
+//        //echo "<pre>"; echo $img; die;
+//        $imagePath = $img->store('/img');
+//        if ($img) {
+//
+//        }else
+//        {
+//            $imagePath='';
+//        }
+//        Challenge::where('id', $challengeReview['id'])->update(['Status'=>$challengeReview['Status'], 'Review'=>$challengeReview['Review'], 'Photo'=>$imagePath]);
+//
+//        return redirect('/challenge');
+//    }
+
     public function sendReview(Request $request)
     {
-        $challengeReview = $request->all();
-        $image = base64_encode($request['image']);
-        $img =  $request->file('image');
-        //echo "<pre>"; echo $img; die;
-        $imagePath = $img->store('/img');
-        if ($img) {
+        $challengeId = $request->input('id');
+        $request->validate([
+            'Photo' => 'required|image',
+        ]);
 
-        }else
-        {
-            $imagePath='';
-        }
-        Challenge::where('id', $challengeReview['id'])->update(['Status'=>$challengeReview['Status'], 'Review'=>$challengeReview['Review'], 'Photo'=>$imagePath]);
+        $path = $request->file('Photo')->store('public/photos');
 
-        return redirect('/challenge');
+        $challangeDetail = new Challenge();
+        $challangeDetail->id = Auth::user()->id;
+        $challangeDetail->Photo = $path;
+        //echo "<pre>"; print_r($path); die;
+        $newpath = substr($path,6);
+        $challangeDetail->update();
+        Challenge::where('id', $challengeId)->update(['Photo'=>$newpath]);
+        return redirect('/')->with('success', 'Zdjęcie zostało dodane.');
     }
 
 }
