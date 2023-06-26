@@ -52,7 +52,7 @@ Route::group(['middleware'=>['auth']], function () {
 
     Route::get('/inreview', [UsersController::class, 'inreview']);
 
-    //Route::any('/phase/3', [UsersController::class, 'phase3']);
+    gRoute::any('/phase/3', [UsersController::class, 'phase3']);
 
     Route::post('/photoupload', [UsersController::class, 'postphoto']);
 
