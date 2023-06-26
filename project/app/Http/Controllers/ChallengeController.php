@@ -101,6 +101,7 @@ class ChallengeController extends Controller
             $challangeDetail->update();
             Challenge::where('id', $challengeId)->update(['Status' => $challangeReview['Status'], 'Review' => $challangeReview['Review'], 'Photo' => $newpath]);
             return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
+
         }
         else
         {
@@ -114,7 +115,13 @@ class ChallengeController extends Controller
             $challangeDetail->update();
             Challenge::where('id', $challengeId)->update(['Status' => $challangeReview['Status'], 'Review' => $challangeReview['Review'], 'Photo' => $newpath]);
             return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
+
         }
-    }
+
+
+        }
+
+
+
 
 }
