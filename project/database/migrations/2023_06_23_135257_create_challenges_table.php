@@ -21,8 +21,8 @@ class CreateChallengesTable extends Migration
             $table->binary('Photo');
             $table->string('Status');
             $table->string('Review');
-            $table->string('StartDate');
-            $table->string('FinalDate');
+            $table->date('StartDate')->nullable();
+            $table->date('FinalDate')->nullable();
             $table->timestamps();
         });
     }

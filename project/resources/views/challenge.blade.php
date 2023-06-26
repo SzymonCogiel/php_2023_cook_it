@@ -1,13 +1,4 @@
 <html>
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +18,17 @@
 <br>
 <hr>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <div class="up">
     <div class="left">
         <div class="card">
@@ -40,18 +42,52 @@
                 @endif
                 <form method="POST" action="/sendChallange">
                     @csrf
-                    <label for="Dish">Dish name:</label><br>
-                    <input type="text" id="Dish" name="Dish"><br>
-                    <label for="Level">Skill level(0 - 10):</label><br>
-                    <input type="text" id="Level" name="Level" value="0"><br>
-                    <label for="Price">Probably price:</label><br>
-                    <input type="text" id="Price" name="Price" value="0"><br><br>
-                    <label for="Ingredients">Ingredients:</label><br>
-                    <input type="text" id="Ingredients" name="Ingredients"><br><br>
-                    <label for="Allergens">Allergens:</label><br>
-                    <input type="text" id="Allergens" name="Allergens"><br><br>
-                    <label for="Note">Note from you:</label><br>
-                    <input type="text" id="Note" name="Note"><br><br>
+                    <style>
+                        .form-group {
+                            margin-bottom: 10px;
+                        }
+
+                        label {
+                            font-weight: bold;
+                        }
+
+                        input[type="text"] {
+                            width: 100%;
+                            padding: 8px;
+                            border-radius: 4px;
+                            border: 1px solid #ccc;
+                        }
+                    </style>
+
+                    <div class="form-group">
+                        <label for="Dish">Dish name:</label>
+                        <input type="text" id="Dish" name="Dish">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Level">Skill level (0 - 10):</label>
+                        <input type="text" id="Level" name="Level" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Price">Probably price:</label>
+                        <input type="text" id="Price" name="Price" value="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Ingredients">Ingredients:</label>
+                        <input type="text" id="Ingredients" name="Ingredients">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Allergens">Allergens:</label>
+                        <input type="text" id="Allergens" name="Allergens">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Note">Note from you:</label>
+                        <input type="text" id="Note" name="Note">
+                    </div>
 
                     <button type="submit">Send</button>
                 </form>

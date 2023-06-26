@@ -48,33 +48,62 @@
     @else
         @foreach($challenges as $key => $challenge)
             <div class="challenge-details {{ $key === 0 ? '' : 'hidden' }}">
-                <div class="col-md-4">
+                <div class="col-md-4" >
+                    <style>
+                        .left {
+                            font-weight: bold;
+                            float: left;
+                            clear: left;
+                            width: 120px;
+                        }
+
+                        .right {
+                            float: left;
+                            margin-left: 10px;
+                        }
+                    </style>
+
                     <p class="left">Author:</p>
                     <p class="right">{{ $challenge->Author }}</p>
+
                     <p class="left">Dish:</p>
                     <p class="right">{{ $challenge->Dish }}</p>
+
                     <p class="left">Price:</p>
                     <p class="right">{{ $challenge->Price }}</p>
+
                     <p class="left">Ingredients:</p>
                     <p class="right">{{ $challenge->Ingredients }}</p>
+
                     <p class="left">Allergens:</p>
                     <p class="right">{{ $challenge->Allergens }}</p>
+
                     <p class="left">Level:</p>
                     <p class="right">{{ $challenge->Level }}</p>
-                    <p class="left">Note:</p>
-                    <p class="right">{{ $challenge->Note }}</p>
-                    <p class="left">Challenger:</p>
-                    <p class="right">{{ $challenge->Challenger }}</p>
-                    <p class="left">Photo:</p>
-                    <p class="right">{{ $challenge->Photo }}</p>
-                    <p class="left">Status:</p>
-                    <p class="right">{{ $challenge->Status }}</p>
-                    <p class="left">Review:</p>
-                    <p class="right">{{ $challenge->Review }}</p>
-                    <p class="left">StartDate:</p>
-                    <p class="right">{{ $challenge->StartDate}}</p>
-                    <p class="left">FinalDate:</p>
-                    <p class="right">{{ $challenge->FinalDate}}</p>
+
+{{--                    <p class="left">Note:</p>--}}
+{{--                    <p class="right">{{ $challenge->Note }}</p>--}}
+
+{{--                    <p class="left">Challenger:</p>--}}
+{{--                    <p class="right">{{ $challenge->Challenger }}</p>--}}
+
+{{--                    <p class="left">Photo:</p>--}}
+{{--                    <p class="right">{{ $challenge->Photo }}</p>--}}
+
+{{--                    <p class="left">Status:</p>--}}
+{{--                    <p class="right">{{ $challenge->Status }}</p>--}}
+
+{{--                    <p class="left">Review:</p>--}}
+{{--                    <p class="right">{{ $challenge->Review }}</p>--}}
+
+{{--                    <p class="left">StartDate:</p>--}}
+{{--                    <p class="right">{{ $challenge->StartDate }}</p>--}}
+
+{{--                    <p class="left">FinalDate:</p>--}}
+{{--                    <p class="right">{{ $challenge->FinalDate }}</p>--}}
+                    <br>
+                    <br>
+                    <br><br><br>
                     <br>
                     <form method="POST" action="/sendId">
                         @csrf

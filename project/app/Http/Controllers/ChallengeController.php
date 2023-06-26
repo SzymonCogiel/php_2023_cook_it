@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Challenge;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ChallengeController extends Controller
 {
@@ -37,8 +38,7 @@ class ChallengeController extends Controller
             'Photo' => '',
             'Status' => '',
             'Review' => '',
-            'StartDate' => '',
-            'FinalDate' => '',
+
         ]);
 
         // Get the authenticated user's ID as the sender ID
@@ -48,8 +48,7 @@ class ChallengeController extends Controller
         $validatedData['Photo'] = '';
         $validatedData['Status'] = '';
         $validatedData['Review'] = '';
-        $validatedData['StartDate'] = 0;
-        $validatedData['FinalDate'] = 0;
+
         // echo "<pre>"; print_r($validatedData); die;
         // Create a new challenge
         Challenge::create($validatedData);
@@ -73,6 +72,11 @@ class ChallengeController extends Controller
         $challengeId = $request->input('id');
 
         Challenge::where('id', $challengeId)->update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
+        Challenge::where('id', $challengeId)->update(['Status'=>'In progress']);
+        $data = Carbon::now();
+        Challenge::where('id', $challengeId)->update(['StartDate'=>$data]);
+        $data->addDay(7);
+        Challenge::where('id', $challengeId)->update(['FinalDate'=>$data]);
         //update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
 
         return redirect('/search');
