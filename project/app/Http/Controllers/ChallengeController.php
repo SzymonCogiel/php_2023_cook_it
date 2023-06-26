@@ -86,21 +86,35 @@ class ChallengeController extends Controller
         $challangeReview = $request->all();
         $challengeId = $request->input('id');
         $request->validate([
-            'Photo' => 'required|image',
+            'Photo' => 'nullable|image',
             'Status' => '',
 
         ]);
+        if ($request->has('Photo')) {
+            $path = $request->file('Photo')->store('public/photos');
 
-        $path = $request->file('Photo')->store('public/photos');
+            $challangeDetail = new Challenge();
+            $challangeDetail->id = Auth::user()->id;
+            $challangeDetail->Photo = $path;
 
-        $challangeDetail = new Challenge();
-        $challangeDetail->id = Auth::user()->id;
-        $challangeDetail->Photo = $path;
+            $newpath = substr($path, 6);
+            $challangeDetail->update();
+            Challenge::where('id', $challengeId)->update(['Status' => $challangeReview['Status'], 'Review' => $challangeReview['Review'], 'Photo' => $newpath]);
+            return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
+        }
+        else
+        {
+            $path = 'storage/photos/food.jpg';
 
-        $newpath = substr($path,6);
-        $challangeDetail->update();
-        Challenge::where('id', $challengeId)->update(['Status'=>$challangeReview['Status'],'Review'=>$challangeReview['Review'],'Photo'=>$newpath]);
-        return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
+            $challangeDetail = new Challenge();
+            $challangeDetail->id = Auth::user()->id;
+            $challangeDetail->Photo = $path;
+
+            $newpath = substr($path, 8);
+            $challangeDetail->update();
+            Challenge::where('id', $challengeId)->update(['Status' => $challangeReview['Status'], 'Review' => $challangeReview['Review'], 'Photo' => $newpath]);
+            return redirect('/challenge')->with('success', 'Zdjęcie zostało dodane.');
+        }
     }
 
 }
