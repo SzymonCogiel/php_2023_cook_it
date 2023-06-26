@@ -32,7 +32,7 @@
     <a href="/search">Challenge search</a> &emsp;
     <a href="/received">Messages</a> &emsp;
     <a href="/challenge">Add challange</a> &emsp;
-    <a href="/profile">My profile</a>
+    <a href="/profile">My profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
 <br>
@@ -47,21 +47,10 @@
         <p>No challenges found.</p>
     @else
         @foreach($challenges as $key => $challenge)
+            <div class="card">
             <div class="challenge-details {{ $key === 0 ? '' : 'hidden' }}">
                 <div class="col-md-4" >
-                    <style>
-                        .left {
-                            font-weight: bold;
-                            float: left;
-                            clear: left;
-                            width: 120px;
-                        }
 
-                        .right {
-                            float: left;
-                            margin-left: 10px;
-                        }
-                    </style>
 
                     <p class="left">Author:</p>
                     <p class="right">{{ $challenge->Author }}</p>
@@ -81,26 +70,6 @@
                     <p class="left">Level:</p>
                     <p class="right">{{ $challenge->Level }}</p>
 
-{{--                    <p class="left">Note:</p>--}}
-{{--                    <p class="right">{{ $challenge->Note }}</p>--}}
-
-{{--                    <p class="left">Challenger:</p>--}}
-{{--                    <p class="right">{{ $challenge->Challenger }}</p>--}}
-
-{{--                    <p class="left">Photo:</p>--}}
-{{--                    <p class="right">{{ $challenge->Photo }}</p>--}}
-
-{{--                    <p class="left">Status:</p>--}}
-{{--                    <p class="right">{{ $challenge->Status }}</p>--}}
-
-{{--                    <p class="left">Review:</p>--}}
-{{--                    <p class="right">{{ $challenge->Review }}</p>--}}
-
-{{--                    <p class="left">StartDate:</p>--}}
-{{--                    <p class="right">{{ $challenge->StartDate }}</p>--}}
-
-{{--                    <p class="left">FinalDate:</p>--}}
-{{--                    <p class="right">{{ $challenge->FinalDate }}</p>--}}
                     <br>
                     <br>
                     <br><br><br>
@@ -113,6 +82,7 @@
                     </form>
                     <br>
                 </div>
+            </div>
             </div>
         @endforeach
 

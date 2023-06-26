@@ -53,7 +53,11 @@ label{
     border: 1px solid #462314;
     box-shadow: 10px 20px 10px #888888;
 }
-
+.profile{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 button{
     width: 100px;
     height: 40px;

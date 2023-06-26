@@ -108,7 +108,8 @@ class UsersController extends Controller
             $userDetail->points = 0;
             $userDetail->photo = '';
             $userDetail->save();
-            return redirect('phase/3');
+            //return redirect('phase/3');
+            return view('users.phase3');
         }
 
         return view('users.phase2');
@@ -124,12 +125,12 @@ class UsersController extends Controller
     }
 
 
-    public function phase3(Request $request)
-    {
-        $user_id = Auth::User()['id'];
-        $user_photos = UsersPhoto::where('user_id', $user_id)->get();
-        return view('users.phase3')->with(compact('user_photos'));
-    }
+//    public function phase3(Request $request)
+//    {
+//        $user_id = Auth::User()['id'];
+//        $user_photos = UsersPhoto::where('user_id', $user_id)->get();
+//        return view('users.phase3')->with(compact('user_photos'));
+//    }
 
     public function __construct()
     {

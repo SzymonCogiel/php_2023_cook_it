@@ -10,7 +10,7 @@
     <a href="/search">Challenge search</a> &emsp;
     <a href="/received">Messages</a> &emsp;
     <a href="/challenge">Add challange</a> &emsp;
-    <a href="/profile">My profile</a>
+    <a href="/profile">My profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
 <br>
