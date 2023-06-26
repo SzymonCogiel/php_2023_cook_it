@@ -58,28 +58,7 @@ class UsersController extends Controller
         return view('users.register');
     }
 
-    //    public function checkUsername(Request $request)
-    //    {
-    //        $data = $request->all();
-    //        $usersCount = User::where('username', $data['username'])->count();
-    //        if ($usersCount > 0) {
-    //            echo 'false';
-    //        } else {
-    //            echo 'true';
-    //        }
-    //    }
 
-    //    public function checkEmail(Request $request)
-    //    {
-    //        $data = $request->all();
-    //        $usersCount = User::where('email', $data['email'])->count();
-    //        if ($usersCount > 0) {
-    //            echo 'false';
-    //        } else {
-    //            echo 'true';
-    //        }
-    //
-    //    }
     public function signin(Request $request)
     {
         if (Auth::check()) {
@@ -107,31 +86,7 @@ class UsersController extends Controller
 
         return view('users.login');
     }
-    //    public function signin(Request $request){
-    //        if($request->isMethod('post')){
-    //            $data = $request->input();
-    //            echo"<pre>"; print_r($data);
-    //    }
-    //    }
-    //    public function signin(Request $request)
-    //    {
-    //        if ($request->isMethod('post')) {
-    //            $data = $request->input();
-    //
-    //            if (Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
-    //                echo "XD";
-    //                if (preg_match("/contact/i", session('current_url'))) {
-    //                    session()->put('frontSession', $data['username']);
-    //                    return redirect(session('current_url'));
-    //                } else {
-    //                    session()->put('frontSession', $data['username']);
-    //                    return redirect('/phase/2');
-    //                }
-    //            } else {
-    //                return redirect()->back()->with('flash_message_error', 'Invalid Username or Password');
-    //            }
-    //        }
-    //    }
+
     public function phase2(Request $request)
     {
         if ($request->isMethod('post')) {
@@ -158,128 +113,7 @@ class UsersController extends Controller
 
         return view('users.phase2');
     }
-    //    public function phase2(Request $request)
-    //    {
-    //        $userFormCount = UserDetail::where('user_id', Auth::user()->getAuthIdentifier())
-    //            ->where('status', 0)
-    //            ->count();
-    //            if($userFormCount>0) {
-    //                return redirect('/inreview');
-    //            }
-    //
-    //        if ($request->isMethod('post')) {
-    //            $data = $request->all();
-    //
-    //            //echo "<pre>"; print_r($data); die;
-    //            // //linijka która tylko pokazuje czy się dobrze zapisuje, można usunąć, przydatna przy front
-    //
-    //            if (empty($data['user_id'])) {
-    //                $userDetail = new UserDetail();
-    //                $userDetail->user_id = Auth::User()['id'];
-    //
-    //            } else {
-    //                $userDetail = UserDetail::where('user_id', $data['user_id'])->firts();
-    //                $userDetail->status = 0;
-    //            }
-    //            $userDetail->username = Session::get('frontSession');
-    //            $userDetail->user_id = Auth::User()['id'];
-    //            $userDetail->dob = $data['dob'];
-    //            $userDetail->gender = $data['gender'];
-    //            $userDetail->height = $data['height'];
-    //            $userDetail->marital_status = $data['maritial_status'];
-    //            //$userDetail->save();
-    //            if (empty($data['body_type'])) {
-    //
-    //                $data['body_type'] = '';
-    //            }
-    //
-    //            if (empty($data['city'])) {
-    //
-    //                $data['city'] = '';
-    //            }
-    //
-    //            if (empty($data['state'])) {
-    //
-    //                $data['state'] = '';
-    //            }
-    //
-    //            if (empty($data['country'])) {
-    //
-    //                $data['country'] = '';
-    //            }
-    //
-    //
-    //            if (empty($data['education'])) {
-    //
-    //                $data['education'] = '';
-    //            }
-    //
-    //
-    //            if (empty($data['occupation'])) {
-    //
-    //                $data['occupation'] = '';
-    //            }
-    //
-    //
-    //            if (empty($data['income'])) {
-    //                $data['income'] = '';
-    //            }
-    //
-    //
-    //            if (empty($data['complexion'])) {
-    //                $data['complexion'] = '';
-    //            }
-    //
-    //            $userDetail->body_type = $data['body_type'];
-    //            $userDetail->complexion = $data['complexion'];
-    //            $userDetail->city = $data['city'];
-    //            $userDetail->state = $data['state'];
-    //            $userDetail->country = $data['country'];
-    //            $userDetail->languages = $data['languages'];
-    //
-    //            $userDetail->education = $data['education'];
-    //            $userDetail->occupation = $data['occupation'];
-    //            $userDetail->income = $data['income'];
-    //            $userDetail->about_myself = $data['about_myself'];
-    //            $userDetail->about_partner = $data['about_partner'];
-    //
-    //            $hobbies = "";
-    //            if (!empty($data['hobbies'])) {
-    //                foreach ($data['hobbies'] as $hobby) {
-    //                    $hobbies .= $hobby . ', ';
-    //                }
-    //            }
-    //
-    //            $userDetail->hobbies = $hobbies;
-    //
-    //
-    //            $languages = "";
-    //            if (!empty($data['languages'])) {
-    //                foreach ($data['languages'] as $language) {
-    //                    $languages .= $language . ', ';
-    //                }
-    //            }
-    //            $userDetail->languages = $languages;
-    //            $userDetail->save();
-    //        }
-    //
-    //
-    //        // Get all Countries
-    //
-    //        $countries = Country::get();
-    //
-    //        // Get all languages
-    //
-    //
-    //        $languages = Language::orderBy('name', 'ASC')->get();
-    //
-    //
-    //        // Get all Hobbies
-    //
-    //
-    //        $hobbies = Hobby::orderBy('title', 'ASC')->get();
-    //
-    //        return view('users.phase2')->with(compact('countries', 'languages', 'hobbies'));
+       return view('users.phase2')->with(compact('countries', 'languages', 'hobbies'));
     //    }
 
     public function logout()
@@ -544,20 +378,38 @@ class UsersController extends Controller
     public function sendPhoto(Request $request)
     {
         $request->validate([
-            'photo' => 'required|image',
+            'photo' => 'nullable|image',
         ]);
-
-        $path = $request->file('photo')->store('public/photos');
-        $userDetail=new UserDetail();
-        $userDetail->id = Auth::user()->id;
-        $userDetail->photo = $path;
-        //echo  $path; die;
-        $newPath = substr($path, 6);
-        //echo  Auth::user()->id; die;
-        $userDetail->update();
-        UserDetail::where('user_id',Auth::user()->id)->update(['photo'=>$newPath]);
+        if ($request->has('photo')) {
 
 
-        return redirect('/profile')->with('success', 'Zdjęcie zostało dodane.');
+            $path = $request->file('photo')->store('public/photos');
+//
+            $userDetail = new UserDetail();
+            $userDetail->id = Auth::user()->id;
+            $userDetail->photo = $path;
+            //echo  $path; die;
+            $newPath = substr($path, 6);
+            //echo  Auth::user()->id; die;
+            $userDetail->update();
+            UserDetail::where('user_id', Auth::user()->id)->update(['photo' => $newPath]);
+
+
+            return redirect('/profile')->with('success', 'Zdjęcie zostało dodane.');
+        }else
+        {
+            $path ='app/public/photos/avatar.jpg';
+
+            $userDetail = new UserDetail();
+            $userDetail->id = Auth::user()->id;
+            $userDetail->photo = $path;
+            //echo  $path; die;
+            $newPath = substr($path, 4);
+            //echo  Auth::user()->id; die;
+            $userDetail->update();
+            UserDetail::where('user_id', Auth::user()->id)->update(['photo' => $newPath]);
+            return redirect('/profile')->with('success', 'Zostało dodane domyślne zdjęcie.');
+
+        }
     }
 }

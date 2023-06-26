@@ -16,6 +16,7 @@ use Carbon\Carbon;
     <a href="/received">Messages</a> &emsp;
     <a href="/challenge">Add challange</a> &emsp;
     <a href="#">Update profile</a> &emsp;
+    <a href="/profile">My profile</a> &emsp;
     <a href="/logout">Logout</a>
 </div>
 <br>
@@ -51,7 +52,7 @@ use Carbon\Carbon;
         <table>
             <tr><th>Name</th><th>Autor</th><th>Level</th><th>Status</th><th>Time:</th><th>Review</th><th>Photo</th></tr>
             @foreach ($challangeHistory as $key => $challenge)
-                <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Author }}</td><td>{{ $challenge->Level }}</td><td>{{ $challenge->Status }}</td><td>{{ \Carbon\Carbon::parse($challenge->FinalDate)->diffInDays(\Carbon\Carbon::parse($challenge->StartDate)) }}</td><td>{{ $challenge->Review }}</td><td>{{ $challenge->Photo ?? '' }}</td></tr>
+                <tr><td>{{ $challenge->Dish }}</td><td>{{ $challenge->Author }}</td><td>{{ $challenge->Level }}</td><td>{{ $challenge->Status }}</td><td>{{ \Carbon\Carbon::parse($challenge->FinalDate)->diffInDays(\Carbon\Carbon::parse($challenge->StartDate)) }}</td><td>{{ $challenge->Review }}</td><td><img src="{{ Storage::url($challenge->Photo) }}" alt="Zdjęcie" width="200" height="200"></td></tr>
             @endforeach
             <!--CSS: wiersze kolejnych wyzwań będą miały background kolor zależny od statusu:
      - zielony: po akceptacji autora

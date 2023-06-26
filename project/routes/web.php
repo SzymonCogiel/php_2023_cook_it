@@ -82,7 +82,6 @@ Route::post('/sendPhoto', [UsersController::class, 'sendPhoto']);
 
 
 
-
 Route::get('/message', [ChatController::class, 'index']);
 Route::post('/send', [ChatController::class, 'sendMessage']);
 
@@ -96,7 +95,7 @@ Route::post('/sendId', [ChallengeController::class, 'sendID']);
 Route::post('/sendReview', [ChallengeController::class, 'sendReview']);
 
 
-Route::group(['middleware'=>['userslogin']],function(){
+Route::group(['middleware'=>['userslogin']], function () {
 
     Route::any('/phase/2', [UsersController::class, 'phase2'])->name('phase3');
 
@@ -104,27 +103,26 @@ Route::group(['middleware'=>['userslogin']],function(){
 
     //Route::any('/phase/3', [UsersController::class, 'phase3']);
 
-    Route::post('/photoupload',[UsersController::class, 'postphoto']);
+    Route::post('/photoupload', [UsersController::class, 'postphoto']);
 
 
     Route::get('/delete-photo/{photo}', [UsersController::class, 'deletePhoto']);
 
     Route::match(['get', 'post'], '/contact/{username}', [UsersController::class, 'contactUser']);
 
-    Route::get('/shooted-messages',[UsersController::class, 'shootedMessages']);
+    Route::get('/shooted-messages', [UsersController::class, 'shootedMessages']);
 
     //Route::get('/replies', [UsersController::class, 'replies']);
 
-    Route::get('/delete-reply/{id}',[UsersController::class, 'deleteReply']);
+    Route::get('/delete-reply/{id}', [UsersController::class, 'deleteReply']);
 
-    Route::post('/update-reply',[UsersController::class, 'updateReply']);
+    Route::post('/update-reply', [UsersController::class, 'updateReply']);
 });
 
-Route::get('check-username',[UsersController::class, 'checkUsername']);
+Route::get('check-username', [UsersController::class, 'checkUsername']);
 
 //Route::any('/profile/{username}', [UsersController::class, 'viewProfile']);
 
 Route::get('/default-photo/{photo}', [UsersController::class, 'defaultPhoto']);
 
 Route::get('/logout', [UsersController::class, 'logout']);
-
