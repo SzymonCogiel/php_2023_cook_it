@@ -1,4 +1,3 @@
-<!-- Navbar finalnie może być sztywny dołączany ten sam do każdego pliku user przy odpalaniu wszystkiego-->
 <?php
 use Carbon\Carbon;
 ?>

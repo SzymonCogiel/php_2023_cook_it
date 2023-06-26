@@ -42,7 +42,6 @@ class ChallengeController extends Controller
 
         ]);
 
-        // Get the authenticated user's ID as the sender ID
         $authorId = User::getUsernameofuser(Auth::id());
         $validatedData['Author'] = $authorId;
         $validatedData['Challenger'] = '';
@@ -50,8 +49,7 @@ class ChallengeController extends Controller
         $validatedData['Status'] = '';
         $validatedData['Review'] = '';
 
-        // echo "<pre>"; print_r($validatedData); die;
-        // Create a new challenge
+
         Challenge::create($validatedData);
 
         return redirect('/challenge')->with('success', 'Challenge sent successfully.');
@@ -78,28 +76,10 @@ class ChallengeController extends Controller
         Challenge::where('id', $challengeId)->update(['StartDate'=>$data]);
         $data->addDay(7);
         Challenge::where('id', $challengeId)->update(['FinalDate'=>$data]);
-        //update(['Challenger'=>User::getUsernameofuser(Auth::id())]);
 
         return redirect('/search');
     }
 
-//    public function sendReview(Request $request)
-//    {
-//        $challengeReview = $request->all();
-//        $image = base64_encode($request['image']);
-//        $img =  $request->file('image');
-//        //echo "<pre>"; echo $img; die;
-//        $imagePath = $img->store('/img');
-//        if ($img) {
-//
-//        }else
-//        {
-//            $imagePath='';
-//        }
-//        Challenge::where('id', $challengeReview['id'])->update(['Status'=>$challengeReview['Status'], 'Review'=>$challengeReview['Review'], 'Photo'=>$imagePath]);
-//
-//        return redirect('/challenge');
-//    }
 
     public function sendReview(Request $request)
     {
@@ -116,7 +96,7 @@ class ChallengeController extends Controller
         $challangeDetail = new Challenge();
         $challangeDetail->id = Auth::user()->id;
         $challangeDetail->Photo = $path;
-        //echo "<pre>"; print_r($path); die;
+        
         $newpath = substr($path,6);
         $challangeDetail->update();
         Challenge::where('id', $challengeId)->update(['Status'=>$challangeReview['Status'],'Review'=>$challangeReview['Review'],'Photo'=>$newpath]);

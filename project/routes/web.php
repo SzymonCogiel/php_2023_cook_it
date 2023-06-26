@@ -11,53 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require _DIR_.'/auth.php';
-
-Route::resource('/comments', CommentController::class);
-Route::resource('/books', BookController::class)->middleware(['auth']);
-
-
-
-Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-*/
-//Route::middleware(['admin'])->group(function () {
-//    Route::get('admin/dashboard', [AdminController::class, 'dashboard']);
-//    Route::get('/settings', [AdminController::class, 'settings']);
-//    Route::get('admin/views_users', [UsersController::class, 'viewUsers']);
-//    Route::post('/admin/update-user-status', [UsersController::class, 'updateUserStatus']);
-//    Route::post('/admin/update-photo-status', [UsersController::class, 'updatePhotoStatus']);
-//});
 
 Route::match(['get','post'], '/admin', [AdminController::class, 'login']);
 
@@ -77,8 +30,6 @@ Route::get('/challenge', [ChallengeController::class, 'indexChallange']);
 Route::post('/sendChallange', [ChallengeController::class, 'sendChallange']);
 
 Route::post('/sendPhoto', [UsersController::class, 'sendPhoto']);
-
-
 
 
 
