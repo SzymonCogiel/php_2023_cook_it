@@ -30,22 +30,17 @@
 </div>
 
 
-<h2>Wiadomości odebrane</h2>
+<h2>Received</h2>
 
 @if ($receivedMessages->count() > 0)
-    <ul>
+    <table>
+        <tr><th>Sender</th><th>Receiver</th><th>Message</th><th>Time</th></tr>
         @foreach ($receivedMessages as $message)
-            <li>
-                <strong>Od:</strong> {{ $message->sender }}
-                <br>
-                <strong>Treść:</strong> {{ $message->message }}
-                <br>
-                <strong>Data utworzenia:</strong> {{ $message->created_at }}
-            </li>
+            <tr> <td>{{ $message->sender }} </td><td> {{ $message->receiver }} </td><td> {{ $message->message }}</td><td>{{ $message->created_at }}</td></tr>
         @endforeach
-    </ul>
+    </table>
 @else
-    <p>Brak wiadomości.</p>
+    <p>Empty</p>
 @endif
 </body>
 </html>

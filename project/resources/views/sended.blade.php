@@ -1,14 +1,9 @@
 <html>
-
-
-
-
 <head>
     <title>Chat Application</title>
 </head>
 <body>
-
-link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Balthazar&display=swap" rel="stylesheet">
 
@@ -34,15 +29,15 @@ link rel="preconnect" href="https://fonts.googleapis.com">
 
 
 
-<h2>Chat Application</h2>
+<h2>Send</h2>
 
 <div>
-    <h3>Messages</h3>
-    <ul>
+    <table>
+        <tr><th>Sender</th><th>Receiver</th><th>Message</th><th>Time</th></tr>
         @foreach ($messages as $message)
-            <li>{{ $message->sender }} to {{ $message->receiver }}: {{ $message->message }}</li>
+            <tr> <td>{{ $message->sender }} </td><td> {{ $message->receiver }} </td><td> {{ $message->message }}</td><td>{{ $message->created_at }}</td></tr>
         @endforeach
-    </ul>
+    </table>
 </div>
 
 </body>

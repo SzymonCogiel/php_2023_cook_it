@@ -32,14 +32,14 @@ use Carbon\Carbon;
             <br>
             <img class="profile" src="{{ Storage::url($userDetail->photo) }}" width="200" height="200" alt="User's photo">
         </div>
-        <div class="right">
+        <div class="right info">
             <h2>Description:</h2>
-            <p><b>Points: </b> {{ $userDetail->points }}</p>
-            <p><b>Cooking skill level: </b> {{ $userDetail->skills }}</p>
-            <p><b>City: </b>{{ $userDetail->city }}</p>
-            <p><b>Availability to travel: </b> {{ $userDetail->travel }}</p>
-            <p><b>Max price to spend: </b> {{ $userDetail->cost }}</p>
-            <p><b>Allergies: </b>{{ $userDetail->alergie }}</p>
+            <p class="pleft">Points: </p> <p class="pright">{{ $userDetail->points }}</p>
+            <p class="pleft">Cooking skill level: </p> <p class="pright">{{ $userDetail->skills }}</p>
+            <p class="pleft">City: </p> <p class="pright">{{ $userDetail->city }}</p>
+            <p class="pleft">Availability to travel: </p> <p class="pright"> {{ $userDetail->travel }}</p>
+            <p class="pleft">Max price to spend:  </p> <p class="pright">{{ $userDetail->cost }}</p>
+            <p class="pleft">Allergies:  </p> <p class="pright">{{ $userDetail->alergie }}</p>
         </div>
     </div>
     <br>

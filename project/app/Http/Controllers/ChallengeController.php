@@ -45,7 +45,7 @@ class ChallengeController extends Controller
         $authorId = User::getUsernameofuser(Auth::id());
         $validatedData['Author'] = $authorId;
         $validatedData['Challenger'] = '';
-        $validatedData['Photo'] = '';
+        $validatedData['Photo'] = '/photos/food.jpg';
         $validatedData['Status'] = '';
         $validatedData['Review'] = '';
 
@@ -84,11 +84,12 @@ class ChallengeController extends Controller
     public function sendReview(Request $request)
     {
         $challangeReview = $request->all();
+        //echo print_r($challangeReview); die;
+
         $challengeId = $request->input('id');
         $request->validate([
             'Photo' => 'nullable|image',
             'Status' => '',
-
         ]);
         if ($request->has('Photo')) {
             $path = $request->file('Photo')->store('public/photos');

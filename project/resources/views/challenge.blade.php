@@ -113,14 +113,14 @@ use Carbon\Carbon;
                         <td>{{ $challenge->Level }}</td>
                         <td>
                             <label for="Status"></label>
-                            <input type="text" id="Status" name="Status" value="N"><br><br></td>
+                            <input type="text" id="Status" name="Status" value="{{ $challenge->Status }}"><br><br></td>
                         <td>{{ \Carbon\Carbon::parse($challenge->FinalDate)->diffInDays(\Carbon\Carbon::parse($challenge->StartDate)) }}</td>
                         <td>
                             <label for="Review"></label>
-                            <input type="textbox" id="Review" name="Review"><br><br></td>
+                            <input type="textbox" id="Review" name="Review" value="{{ $challenge->Review }}"><br><br></td>
                         <td>
                             <label for="Photo"></label>
-                            <input type="file" name="Photo" id="Photo">
+                            <input type="file" name="Photo" id="Photo" value = "{{ $challenge->Photo}}">
                         </td>
                         <label for="id"></label>
                         <input type="hidden" id="id" name="id" value="{{ $challenge->id }}"><br><br>
@@ -129,7 +129,7 @@ use Carbon\Carbon;
 
             </table>
             <br>
-            <button type="submit"> Submit review</button>
+                <button type="submit">Submit review</button>
         </form>
     </div>
 

@@ -40,7 +40,7 @@
 
 <div class="col-md-6">
 
-    <h3>Find new challenge</h3>
+    <h2>Find new challenge</h2>
     <p>Click on the submit button to take on new culinary challenges and meet other chefs!</p>
 
     @if($challenges->isEmpty())
@@ -50,28 +50,25 @@
             <div class="card">
             <div class="challenge-details {{ $key === 0 ? '' : 'hidden' }}">
                 <div class="col-md-4" >
+                    <div class="info color">
+                    <p class="pleft">Author:</p>
+                    <p class="pright">{{ $challenge->Author }}</p>
 
+                    <p class="pleft">Dish:</p>
+                    <p class="pright">{{ $challenge->Dish }}</p>
 
-                    <p class="left">Author:</p>
-                    <p class="right">{{ $challenge->Author }}</p>
+                    <p class="pleft">Price:</p>
+                    <p class="pright">{{ $challenge->Price }}</p>
 
-                    <p class="left">Dish:</p>
-                    <p class="right">{{ $challenge->Dish }}</p>
+                    <p class="pleft">Ingredients:</p>
+                    <p class="pright">{{ $challenge->Ingredients }}</p>
 
-                    <p class="left">Price:</p>
-                    <p class="right">{{ $challenge->Price }}</p>
+                    <p class="pleft">Allergens:</p>
+                    <p class="pright">{{ $challenge->Allergens }}</p>
 
-                    <p class="left">Ingredients:</p>
-                    <p class="right">{{ $challenge->Ingredients }}</p>
-
-                    <p class="left">Allergens:</p>
-                    <p class="right">{{ $challenge->Allergens }}</p>
-
-                    <p class="left">Level:</p>
-                    <p class="right">{{ $challenge->Level }}</p>
-
-                    <br>
-                    <br>
+                    <p class="pleft">Level:</p>
+                    <p class="pright">{{ $challenge->Level }}</p>
+                    </div>
                     <br><br><br>
                     <br>
                     <form method="POST" action="/sendId">
@@ -87,8 +84,8 @@
         @endforeach
 
         <div class="navigation-buttons">
-            <button onclick="showPreviousChallenge()">Previous</button>
-            <button onclick="showNextChallenge()">Next</button>
+            <button id="l" onclick="showPreviousChallenge()">Previous</button>
+            <button id="p" onclick="showNextChallenge()">Next</button>
 
         </div>
     @endif
